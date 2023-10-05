@@ -64,16 +64,16 @@ namespace Trabajo_Practico_Algoritmos
 		}
 		
 	}
-	
+	// Classe servicios
 	class Servicio
 	{
 		private string nombreSevicio;
 		private string tipoServicio;
 		private string descripcionServicio;
 		private int cantidadSolicitada;
-		private float costoFinal;
+		private double costoFinal;
 		
-		public Servicio(string nombreServicio, string tipoServicio, string descripcionServicio, int cantidadSolicitada, float costoFinal)
+		public Servicio(string nombreServicio, string tipoServicio, string descripcionServicio, int cantidadSolicitada, double costoFinal)
 		{
 			this.nombreSevicio = nombreSevicio;
 			this.tipoServicio = tipoServicio;
@@ -106,11 +106,81 @@ namespace Trabajo_Practico_Algoritmos
 			set{this.cantidadSolicitada = value;}
 		}
 		
-		public float CostoFinal()
+		public double CostoFinal()
 		{
 			get {return costoFinal;}
 			set{this.costoFinal = value;}
 		}
 	}
 	
+	
+	//Clase de empleado
+	class Empleado
+	{
+		protected string nombre, apellido, descripcionTarea;
+		protected int dni, legajo;
+		protected double sueldo;
+		
+		public Empleado(string nombre, string apellido, string descripcionTarea, int dni, int legajo, double sueldo)
+		{
+			this.nombre = nombre;
+			this.apellido = apellido;
+			this.descripcionTarea = descripcionTarea;
+			this.dni = dni;
+			this.legajo = legajo;
+			this.sueldo = sueldo;
+		}
+		
+		public string Nombre()
+		{
+			get{return nombre;}
+			set{this.nombre = value;}
+		}
+		
+		public string Apellido()
+		{
+			get{return apellido;}
+			set{this.apellido = value;}
+		}
+		
+		public string Tarea()
+		{
+			get{return descripcionTarea;}
+			set{this.descripcionTarea = value;}
+		}
+		
+		public int DNI()
+		{
+			get{return dni;}
+			set{this.dni = value;}
+		}
+		
+		public int Legajo()
+		{
+			get{return legajo;}
+			set{this.legajo = value;}
+		}
+		
+		public double Sueldo()
+		{
+			get{return sueldo;}
+			set{this.sueldo = value;}
+		}
+		
+		
+		
+	}
+	
+	//Clase para el Encargado, solo tenemos en cuenta el plus de su sueldo,
+	//	ya que menesteres como su funcion se heredan de la clase empleado
+	
+	class Encargado : Empleado
+	{
+		private sueldo;
+		
+		public Encargado(float sueldo) : base(nombre, apellido, dni, legajo, descripcionTarea, sueldo)
+		{
+			this.sueldo = sueldo;
+		}
+	}
 }
