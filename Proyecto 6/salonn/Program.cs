@@ -14,7 +14,7 @@ namespace Trabajo_Practico_Algoritmos
 			
 			Empleado em1 = new Empleado("daiana", "aguilera", "cocinera", 1723544,  60000);
 			
-			Evento en1 = new Evento("divorcio de los padres de flavio" , "divorcio", "walter", 3030303, new DateTime(2023, 10, 10));
+			Evento en1 = new Evento("divorcio de los padres de flavio" , "divorcio", new Encargado("walter", "gonzalez", 41000222, "soy encargado", 120000), 3030303, new DateTime(2023, 10, 10));
 			
 			Servicio se1 = new Servicio("catarina catering", "catering", "hago catering", 15, 2000);
 			
@@ -71,7 +71,7 @@ namespace Trabajo_Practico_Algoritmos
 				                    		
 				                    		break;
 				                    		
-				                    	default: // seria como la opcion 5 (CREEMOS)
+				                    	default: // volver atras
 				                			salir1 = true;
 				                    		break;
 				                    		
@@ -146,30 +146,30 @@ namespace Trabajo_Practico_Algoritmos
 		public ArrayList ListaEventos
 		{
 			get { return listaEventos; }
-			set { listaEventos = value; }
+			// set { listaEventos = value; }
 		}
 
 		public ArrayList ListaEmpleados
 		{
 			get { return listaEmpleados;}
-			set { listaEmpleados = value; }
+			// set { listaEmpleados = value; }
 		}
 
         // metodos
 
-        public void agregarEmpleado(Empleado add)
+        public void agregarEmpleado(Empleado e)
         {
-            this.listaEmpleados.Add(add);
+            this.listaEmpleados.Add(e);
         }
 
-		public void eliminarEmpleado(Empleado eliminar)
+		public void eliminarEmpleado(Empleado e)
 		{
-			this.listaEmpleados.Remove(eliminar);
+			this.listaEmpleados.Remove(e);
 		}
 
-		public Boolean existenciaEmpleado(Empleado existe)
+		public Boolean existenciaEmpleado(Empleado e)
 		{
-			return this.listaEmpleados.Contains(existe);
+			return this.listaEmpleados.Contains(e);
 		}
 
 		public int cantidadEmpleado()
@@ -177,18 +177,21 @@ namespace Trabajo_Practico_Algoritmos
 			return this.listaEmpleados.Count;
 		}
 
-
-
-
-
-		public void cancelarEvento(Evento delete)
+		public Empleado IndiceEmpleado(int pos)
 		{
-			this.listaEventos.Remove(delete);
+			return (Empleado)this.listaEmpleados[pos];
 		}
 
-		public void reservarEvento(Evento add)
+
+
+		public void cancelarEvento(Evento ed)
 		{
-			this.listaEventos.Add(add);
+			this.listaEventos.Remove(ed);
+		}
+
+		public void reservarEvento(Evento a)
+		{
+			this.listaEventos.Add(a);
 		}
 
 		public ArrayList verEventos()
@@ -220,7 +223,8 @@ namespace Trabajo_Practico_Algoritmos
 		private DateTime fecha;
 		private string nombreEvento;
 		private string tipoEvento;
-		private string encargadoEvento;
+		
+		private Encargado encargadoEvento;
 		
 		private int dni;
 		private double costoTotal;
@@ -229,7 +233,7 @@ namespace Trabajo_Practico_Algoritmos
 		
 		// constructor
 
-		public Evento(string nombreEvento, string tipoEvento, string encargadoEvento, int dni, DateTime fecha)
+		public Evento(string nombreEvento, string tipoEvento, Encargado encargadoEvento, int dni, DateTime fecha)
 		{
 			this.encargadoEvento = encargadoEvento;
 			this.nombreEvento = nombreEvento;
@@ -247,7 +251,7 @@ namespace Trabajo_Practico_Algoritmos
 			set {costoTotal = value;}
 		}
 
-		public string EncargadoEvento {
+		public Encargado EncargadoEvento {
 			get {return encargadoEvento;}
 			set {encargadoEvento = value;}
 		}
@@ -278,7 +282,7 @@ namespace Trabajo_Practico_Algoritmos
 		public ArrayList ListaServicios
 		{
 			get { return listaServicios; }
-			set { listaServicios = value; }
+			// set { listaServicios = value; }
 		}
 
         // metodos
@@ -438,11 +442,20 @@ namespace Trabajo_Practico_Algoritmos
 	
 	public class Encargado : Empleado
 	{
-		private new float sueldo; // new para confirmar q estoy cumpliendo con el ocultamiento de la variable
+		private double sueldo; // new para confirmar q estoy cumpliendo con el ocultamiento de la variable
 		
-		public Encargado(string nombre, string apellido, int dni, string descripcionTarea, float sueldo) : base(nombre, apellido, descripcionTarea, dni, sueldo)
+		public Encargado(string nombre, string apellido, int dni, string descripcionTarea, double sueldo) : base(nombre, apellido, descripcionTarea, dni, sueldo)
 		{
 			this.sueldo = sueldo;
+		}
+		
+		public double Sueldo {
+			get {
+				return sueldo;
+			}
+			set {
+				sueldo = value;
+			}
 		}
 	}
 }
