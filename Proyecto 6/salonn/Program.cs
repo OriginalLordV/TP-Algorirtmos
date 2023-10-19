@@ -14,7 +14,7 @@ namespace Trabajo_Practico_Algoritmos
 			
 			Empleado em1 = new Empleado("daiana", "aguilera", "cocinera", 1723544,  60000);
 			
-			Evento en1 = new Evento("divorcio de los padres de flavio" , "divorcio", new Encargado("walter", "gonzalez", 41000222, "soy encargado", 120000), 3030303, new DateTime(2023, 10, 10));
+			Evento divorcio = new Evento("divorcio de los padres de flavio" , "divorcio", new Encargado("walter", "gonzalez", 41000222, "soy encargado", 120000), 3030303, new DateTime(2023, 10, 10));
 			
 			Servicio se1 = new Servicio("catarina catering", "catering", "hago catering", 15, 2000);
 			
@@ -32,6 +32,7 @@ namespace Trabajo_Practico_Algoritmos
                     Console.WriteLine("Elige una de las opciones");
                     
                     int opcion = Convert.ToInt32(Console.ReadLine());
+                    
  					
                     switch (opcion)
                     {
@@ -46,10 +47,13 @@ namespace Trabajo_Practico_Algoritmos
 	                            try {
                             		
 	                            	Console.WriteLine("1. Reservar el salón para un evento");
-	                    			Console.WriteLine("2. Agregar servicios");
-				                    Console.WriteLine("3. Ver fechas disponibles");
-				                    Console.WriteLine("4. Asignar encargado");
-				                    Console.WriteLine("5. Volver Atras");
+	                    			Console.WriteLine("2. Cancelar evento existente");
+				                    Console.WriteLine("3. Ver Eventos");
+				                    Console.WriteLine("4. indice evento");
+				                    Console.WriteLine("5. existencia evento");
+				                    Console.WriteLine("6. contar la cantidad de eventos");
+				                    
+				                    Console.WriteLine("7. Volver Atras");
 				                    
 				                    Console.WriteLine("\nElige una opción:\n");
 				                    int opcion1 = Convert.ToInt32(Console.ReadLine());
@@ -57,20 +61,61 @@ namespace Trabajo_Practico_Algoritmos
 				                    switch (opcion1) {
 				                    		
 				                    	case 1: // reservar el salon para un evento
+				                    		
+				                    		deFiesta.reservarEvento(divorcio);
+				                    		
+				                    		Console.WriteLine("\nRealizado\n");
 				                    		break;
 				                    		
-				                    	case 2: // agregar servicios
+				                    	case 2: // cancelar evento existente
+				                    		
+				                    		deFiesta.cancelarEvento(divorcio);
+				                    		
+				                    		Console.WriteLine("\nRealizado\n");
+				                    		break;
+				                    		
+				                    	case 3: // ver eventos
+				                    		
+				                    		deFiesta.verEventos();
+				                    		
+				                    		Console.WriteLine("si");
+				                    		break;
+				                    		
+				                    	case 4: // indice evento
+				                    		
+				                    		
+				                    		try {
+				                    			
+				                    			Console.WriteLine("\nque posicion deseas llamar?\n");
+				                    			int llamarPos = int.Parse(Console.ReadLine());
+				                    		
+				                    		
+				                    			deFiesta.IndiceEvento(llamarPos);
+				                    			
+				                    			Console.WriteLine("\nRealizado\n");
+				                    						                    			
+				                    		} catch (System.ArgumentOutOfRangeException) {
+				                    			
+				                    			Console.WriteLine("\nno existe tal posicion\n");
+				                    		}
 				                    		
 				                    		break;
 				                    		
-				                    	case 3: // ver fechas disponibles / ver eventos
 				                    		
+				                    	case 5: // ver si existe un evento
+				                    		
+				                    		deFiesta.ExistenciaEvento(divorcio);
+				                    		
+				                    		Console.WriteLine("\nRealizado\n");
 				                    		break;
 				                    		
-				                    	case 4: // asignar encargado
+				                    	case 6: // contar cantidad de Eventos
 				                    		
+				                    		deFiesta.cantidadEvento();
+				                    		
+				                    		Console.WriteLine("\nRealizado\n");
 				                    		break;
-				                    		
+				                    			
 				                    	default: // volver atras
 				                			salir1 = true;
 				                    		break;
@@ -146,7 +191,7 @@ namespace Trabajo_Practico_Algoritmos
 		public ArrayList ListaEventos
 		{
 			get { return listaEventos; }
-			// set { listaEventos = value; }
+			set { listaEventos = value; }
 		}
 
 		public ArrayList ListaEmpleados
@@ -194,9 +239,11 @@ namespace Trabajo_Practico_Algoritmos
 			this.listaEventos.Add(a);
 		}
 
-		public ArrayList verEventos()
+		public void ArrayList verEventos()
 		{
-			return this.listaEventos;
+			foreach (var element in listaEventos) {
+				Console.WriteLine(element);
+			}
 		}
 
 		public Evento IndiceEvento(int pos)
