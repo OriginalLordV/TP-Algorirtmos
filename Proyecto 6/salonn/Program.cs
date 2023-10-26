@@ -14,9 +14,23 @@ namespace Trabajo_Practico_Algoritmos
 			
 			Empleado em1 = new Empleado("daiana", "aguilera", "cocinera", 1723544,  60000);
 			
-			Evento divorcio = new Evento("divorcio de los padres de flavio" , "divorcio", new Encargado("walter", "gonzalez", 41000222, "soy encargado", 120000), 3030303, new DateTime(2023, 10, 10));
 			
+			Encargado encargado = new Encargado("walter", "gonzalez", 41000222, "soy encargado", 120000);
+			Evento divorcio = new Evento("divorcio de los padres de flavio" , "divorcio", "3030303", new DateTime(2023, 10, 10));
 			Servicio se1 = new Servicio("catarina catering", "catering", "hago catering", 15, 2000);
+				Servicio se2 = new Servicio("catarina catering", "catering", "hago catering", 15, 2000);
+					Servicio se3 = new Servicio("catarina catering", "catering", "hago catering", 15, 2000);
+			
+			deFiesta.reservarEvento(divorcio);
+			divorcio.agregarServicio(se1);
+			divorcio.agregarServicio(se2);
+			divorcio.agregarServicio(se3);
+			divorcio.EncargadoEvento = encargado;
+			
+			
+			/*________________________________________<<Inicio del menú>>____________________________________________*/
+			
+		
 			
 			bool salir = false;
  
@@ -49,11 +63,11 @@ namespace Trabajo_Practico_Algoritmos
 	                            	Console.WriteLine("1. Reservar el salón para un evento");
 	                    			Console.WriteLine("2. Cancelar evento existente");
 				                    Console.WriteLine("3. Ver Eventos");
-				                    Console.WriteLine("4. indice evento");
-				                    Console.WriteLine("5. existencia evento");
-				                    Console.WriteLine("6. contar la cantidad de eventos");
+				                    Console.WriteLine("4. Índice evento");
+				                    Console.WriteLine("5. Existencia evento");
+				                    Console.WriteLine("6. Contar la cantidad de eventos");
 				                    
-				                    Console.WriteLine("7. Volver Atras");
+				                    Console.WriteLine("7. Volver Atrás");
 				                    
 				                    Console.WriteLine("\nElige una opción:\n");
 				                    int opcion1 = Convert.ToInt32(Console.ReadLine());
@@ -61,10 +75,97 @@ namespace Trabajo_Practico_Algoritmos
 				                    switch (opcion1) {
 				                    		
 				                    	case 1: // reservar el salon para un evento
+				                    		int opcionA;
+				                    		do
+				                    		{
+				                    			Console.WriteLine("Seleccione Una opción de evento: \n1- Bautismo \n2-Cumpleaños \n3- Fiesta de Quince \n4-Despedida de Soltera/o \n5- Casamiento \n6- Salir");
+				                    			opcionA = int.Parse(Console.ReadLine());
+				                    			string nombreEv,dniCli;
+				                    			int dia, mes;
+				                    			int agno = 2023; 
+				                    			DateTime fecha = DateTime.MinValue;
+												string tipoEv = string.Empty;
+				                    			
+				                    			switch(opcionA)
+				                    			{
+				                    				case 1:
+				                    					tipoEv = "Bautismo";
+				                    					break;
+				                    				case 2:
+				                    					tipoEv = "Cumpleaños";
+				                    					break;
+				                    				case 3:
+				                    					tipoEv = "Fiesta de Quince";
+				                    					break;
+				                    				case 4:
+				                    					tipoEv = "Despedida de soltero";
+				                    					break;
+				                    				case 5:
+				                    					tipoEv = "Casamiento";
+				                    					break;
+				                    				case 6:
+				                    					opcionA = 0;
+				                    					break;
+				                    				default:
+				                    					Console.WriteLine("Ingrese una opción válida.");
+				                    					break;
+				                    			}
+				                    			if (opcionA == 0)
+											    {
+											        break;
+											    }
+
+				                    			
+				                    			Console.WriteLine("¿Para que fecha quiere reservar el evento?");
+				                    					
+				                    					try
+														{
+														    Console.Write("Ingrese el mes: ");
+														    string inputMes = Console.ReadLine();
+														    if (!int.TryParse(inputMes, out mes) || mes < 1 || mes > 12)
+														    {
+														        throw new FormatException("Mes inválido. Por favor, ingrese un número entero válido entre 1 y 12.");
+														    }
+														
+														    Console.Write("Ingrese el día: ");
+														    string inputDia = Console.ReadLine();
+														    if (!int.TryParse(inputDia, out dia) || dia < 1 || dia > 31)
+														    {
+														        throw new FormatException("Día inválido. Por favor, ingrese un número entero válido entre 1 y 31.");
+														    }
+														
+														    fecha = new DateTime(agno, mes, dia);
+														    Console.WriteLine("Fecha ingresada correctamente: " + fecha.ToString());
+														}
+														catch (FormatException e)
+														{
+														    Console.WriteLine(e.Message);
+														}
+
+				                    					
+				                    			Console.Write("Ingrese su nombre: ");
+				                    			nombreEv = Console.ReadLine();
+				                    			Console.Write("Para finalizar, ingrese su DNI.");
+				                    			dniCli= Console.ReadLine();
+				                    			
+				                    			if(dniCli.Length == 8)
+				                    			{
+				                    				
+				                    				Console.WriteLine("El evento se ha agregado con éxito.");
+				                    				Evento evento = new Evento(nombreEv, tipoEv, dniCli, fecha);
+				                    				deFiesta.reservarEvento(evento);
+				                    			}
+				                    			
+				                    			else
+				                    			{
+				                    				Console.WriteLine("Ingrese un DNI válido, debe incluir 8 carácteres y ser todos números.");
+				                    				dniCli= Console.ReadLine();
+				                    			}
+				                    			
+				                    			
+				                    		}
+				                    		while (opcionA != 0);
 				                    		
-				                    		deFiesta.reservarEvento(divorcio);
-				                    		
-				                    		Console.WriteLine("\nRealizado\n");
 				                    		break;
 				                    		
 				                    	case 2: // cancelar evento existente
@@ -96,7 +197,7 @@ namespace Trabajo_Practico_Algoritmos
 				                    						                    			
 				                    		} catch (System.ArgumentOutOfRangeException) {
 				                    			
-				                    			Console.WriteLine("\nno existe tal posicion\n");
+				                    			Console.WriteLine("\nNo existe tal posicióon\n");
 				                    		}
 				                    		
 				                    		break;
@@ -239,11 +340,15 @@ namespace Trabajo_Practico_Algoritmos
 			this.listaEventos.Add(a);
 		}
 
-		public void ArrayList verEventos()
+		public void verEventos()
 		{
-			foreach (var element in listaEventos) {
-				Console.WriteLine(element);
+			foreach (Evento el in listaEventos) {
+				Console.WriteLine("\nEvento {0}:\nNombre del evento: {1}\nFecha del evento{2}\nEncargado del evento: {3} {4}", el.ID, el.NombreEvento, el.Fecha,el.EncargadoEvento.Nombre, el.EncargadoEvento.Apellido);
+				Console.WriteLine("Lista de servicios: ");
+				el.verServicio();
+				Console.WriteLine("");
 			}
+			
 		}
 
 		public Evento IndiceEvento(int pos)
@@ -266,32 +371,34 @@ namespace Trabajo_Practico_Algoritmos
     public class Evento
 	{
 		// variables
-
+		private static int contador =0; 						//se autoincrementa asignando un identificador a cada evento agregago.
 		private DateTime fecha;
 		private string nombreEvento;
 		private string tipoEvento;
-		
+		private int id; 										//el identificador propio de cada evento.
 		private Encargado encargadoEvento;
 		
-		private int dni;
+		private string dni;
 		private double costoTotal;
 		
 		private ArrayList listaServicios;
 		
 		// constructor
 
-		public Evento(string nombreEvento, string tipoEvento, Encargado encargadoEvento, int dni, DateTime fecha)
+		public Evento(string nombreEvento, string tipoEvento,string dni, DateTime fecha)
 		{
 			this.encargadoEvento = encargadoEvento;
 			this.nombreEvento = nombreEvento;
 			this.tipoEvento = tipoEvento;
 			this.dni= dni;
 			this.fecha = fecha;
+			this.id = contador++;  								//El id asignado sera el actual de la clase evento, luego se incrementa. En este caso el id, tambien esta relacionado con el indice dentro de la lista de eventos.
 		
 			listaServicios = new ArrayList();
 		}
 		
 		// propiedades
+		public int ID{get{return id;}}
 		
 		public double CostoTotal {
 			get {return costoTotal;}
@@ -314,7 +421,7 @@ namespace Trabajo_Practico_Algoritmos
 			set {this.fecha = value;}
 		}
 		
-		public int Dni
+		public string Dni
 		{
 			get{return dni;}
 			set{this.dni = value;}
@@ -329,20 +436,27 @@ namespace Trabajo_Practico_Algoritmos
 		public ArrayList ListaServicios
 		{
 			get { return listaServicios; }
-			// set { listaServicios = value; }
+			set { listaServicios = value; }
 		}
 
+		
+		
         // metodos
 
 
         public Boolean existenciaServicio(ArrayList n)
         {
-            return this.listaServicios.Contains(n); // ok ya lo hice
+            return this.listaServicios.Contains(n); 
         }
 
-        public ArrayList verServicio()
+        public void verServicio()
         {
-			return this.listaServicios;
+        	int indice =1;
+        	foreach (Servicio el in this.listaServicios)
+        	{
+        		Console.WriteLine( indice +" "+ el.TipoServicio+" - "+ el.NombreServicio);
+        		indice++;
+        	}
         }
 
 		public Servicio indiceServicio(int pos)
@@ -505,4 +619,9 @@ namespace Trabajo_Practico_Algoritmos
 			}
 		}
 	}
+}
+
+class NoINTdetectedException : Exception
+{
+	
 }

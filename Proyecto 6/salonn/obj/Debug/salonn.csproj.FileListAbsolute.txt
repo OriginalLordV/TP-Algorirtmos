@@ -10,3 +10,9 @@ C:\Users\ytgfl\Documents\GitHub\TP-Algorirtmos\Proyecto 6\salonn\bin\Debug\salon
 C:\Users\ytgfl\Documents\GitHub\TP-Algorirtmos\Proyecto 6\salonn\bin\Debug\salonn.exe
 C:\Users\ytgfl\Documents\GitHub\TP-Algorirtmos\Proyecto 6\salonn\bin\Debug\salonn.pdb
 C:\Users\ytgfl\Documents\GitHub\TP-Algorirtmos\Proyecto 6\salonn\obj\Debug\salonn.pdb
+C:\Users\Walter\Documents\TP-Algoritmos\TP-Algorirtmos\Proyecto 6\salonn\obj\Debug\salonn.csprojResolveAssemblyReference.cache
+C:\Users\Walter\Documents\TP-Algoritmos\TP-Algorirtmos\Proyecto 6\salonn\obj\Debug\salonn.exe
+C:\Users\Walter\Documents\TP-Algoritmos\TP-Algorirtmos\Proyecto 6\salonn\bin\Debug\salonn.exe.config
+C:\Users\Walter\Documents\TP-Algoritmos\TP-Algorirtmos\Proyecto 6\salonn\bin\Debug\salonn.exe
+C:\Users\Walter\Documents\TP-Algoritmos\TP-Algorirtmos\Proyecto 6\salonn\bin\Debug\salonn.pdb
+C:\Users\Walter\Documents\TP-Algoritmos\TP-Algorirtmos\Proyecto 6\salonn\obj\Debug\salonn.pdb
