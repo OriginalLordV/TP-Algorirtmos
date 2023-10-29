@@ -10,13 +10,57 @@ namespace Trabajo_Practico_Algoritmos
 		public static void Main(string[] args)
 		{
 			
+			
 			salon deFiesta = new salon(new ArrayList(), new ArrayList());
 			
-			Empleado em1 = new Empleado("daiana", "aguilera", "cocinera", 1723544,  60000);
+			Encargado walter = new Encargado("Walter", "Gonzalez", 41000222, "Propietario", 120000); // encargado default
 			
-			Evento divorcio = new Evento("divorcio de los padres de flavio" , "divorcio", new Encargado("walter", "gonzalez", 41000222, "soy encargado", 120000), 3030303, new DateTime(2023, 10, 10));
+			Empleado em1 = new Empleado("Daiana", "Aguilera", "cocinera", 17235444,  60000); // empleado default
+
+			// Crear eventos
+			
+	        Evento evento1 = new Evento("Cumpleaños de Juan", "Cumpleaños", walter, 3030303, new DateTime(2023, 11, 15));
+	        
+	        Evento evento2 = new Evento("Boda de Maria", "Boda", walter, 4040404, new DateTime(2023, 12, 20));
+	        
+	        Evento evento3 = new Evento("Aniversario de Bodas", "Aniversario", walter, 5050505, new DateTime(2023, 10, 25));
+	        
+	        Evento evento4 = new Evento("Fiesta de Graduación", "Graduación", walter, 6060606, new DateTime(2023, 11, 5));
+	        
+	        Evento evento5 = new Evento("Baby Shower", "Baby Shower", walter, 7070707, new DateTime(2023, 11, 30));
+	        
+			deFiesta.reservarEvento(evento1);
+			deFiesta.reservarEvento(evento2);
+			deFiesta.reservarEvento(evento3);
+			deFiesta.reservarEvento(evento4);
+			deFiesta.reservarEvento(evento5);
+
+	        // Agregar servicios a los eventos
+	        
+	        Servicio catering = new Servicio("Catarina Catering", "Catering", "Ofrecemos deliciosos platos", 15, 2000);
+
+	        Servicio musica = new Servicio("Orquesta en Vivo", "Música", "Banda en vivo para el evento", 1, 5000);
+
+	        Servicio decoracion = new Servicio("Decoración Temática", "Decoración", "Decoración especializada", 1, 3000);
+
+	        Servicio fotografia = new Servicio("Servicio de Fotografía", "Fotografía", "Fotógrafo profesional para el evento", 1, 2500);
+
+	        Servicio barraLibre = new Servicio("Barra Libre de Bebidas", "Bebidas", "Variedad de bebidas para los invitados", 1, 3500);
 			
 			Servicio se1 = new Servicio("catarina catering", "catering", "hago catering", 15, 2000);
+			
+			// metodos que retornan: los que no piden nada se guardan en variable aca para una utilización mas completa (por si quiero cierto valor en el case 1, ya tengo la variable cargada por ejemplo). los que piden condiciones se sentencian en el case determinado
+			
+			ArrayList eventos = deFiesta.verEventos();
+			
+			int eventoCantidad = deFiesta.cantidadEvento();
+
+			// Evento eventosPos = deFiesta.IndiceEvento(); // EJEMPLO: se sentencia en dicho case
+			
+			// Boolean eventosBool = deFiesta.ExistenciaEvento(); // EJEMPLO: se sentencia en dicho case
+			
+			 
+			
 			
 			bool salir = false;
  
@@ -24,11 +68,12 @@ namespace Trabajo_Practico_Algoritmos
  
                 try
                 {
-                    
+                	
                     Console.WriteLine("1. Administrar eventos");
                     Console.WriteLine("2. Administrar servicios");
                     Console.WriteLine("3. Administrar Empleados / Encargado");
-                    Console.WriteLine("4. Salir");
+                    Console.WriteLine("4. Mostrar datos");
+                    Console.WriteLine("5. Salir");
                     Console.WriteLine("Elige una de las opciones");
                     
                     int opcion = Convert.ToInt32(Console.ReadLine());
@@ -45,79 +90,98 @@ namespace Trabajo_Practico_Algoritmos
                             
                             while (!salir1) {
 	                            try {
-                            		
-	                            	Console.WriteLine("1. Reservar el salón para un evento");
+                            		Console.WriteLine("1. Agregar mi evento");
 	                    			Console.WriteLine("2. Cancelar evento existente");
 				                    Console.WriteLine("3. Ver Eventos");
-				                    Console.WriteLine("4. indice evento");
-				                    Console.WriteLine("5. existencia evento");
-				                    Console.WriteLine("6. contar la cantidad de eventos");
+				                    Console.WriteLine("4. Ver un Evento en especifico / mas detalles.");
 				                    
-				                    Console.WriteLine("7. Volver Atras");
+				                    Console.WriteLine("5. Volver Atras");
 				                    
 				                    Console.WriteLine("\nElige una opción:\n");
-				                    int opcion1 = Convert.ToInt32(Console.ReadLine());
+				                    int opcion1 = int.Parse(Console.ReadLine());
 				                    
 				                    switch (opcion1) {
 				                    		
-				                    	case 1: // reservar el salon para un evento
+				                    	case 1: // agregar un nuevo evento
 				                    		
-				                    		deFiesta.reservarEvento(divorcio);
-				                    		
-				                    		Console.WriteLine("\nRealizado\n");
+				                    		Console.WriteLine("\nIndique su nombre como cliente: \n");
+   											string nombreCliente = Console.ReadLine();
+   											
+   											Console.WriteLine("\nIngrese su dni: \n");
+   											int dnicliente = int.Parse(Console.ReadLine());
+   											
+   											Console.WriteLine("\nIngrese el tipo de evento: \n");
+   											string tipoEvento = Console.ReadLine();
+   											
+   											Console.WriteLine("\nIngrese el año de reserva para el evento (AAAA): \n");
+   											int fechaAnoCliente = int.Parse(Console.ReadLine());
+   											
+   											Console.WriteLine("\nIngrese el mes de reserva para el evento (MM): \n");
+   											int fechaMesCliente = int.Parse(Console.ReadLine());
+   											
+   											Console.WriteLine("\nIngrese el dia de reserva para el evento (DD): \n");
+   											int fechaDiaCliente = int.Parse(Console.ReadLine());
+   											
+   														
+											Evento eventoCliente = new Evento(nombreCliente, tipoEvento, walter, dnicliente, new DateTime(fechaAnoCliente, fechaMesCliente, fechaDiaCliente));
+   											
+   											deFiesta.reservarEvento(eventoCliente);
+
+   											
+   											Console.WriteLine("\nSe agregó con exito su evento " + eventoCliente.NombreEvento + "\n\n");
 				                    		break;
 				                    		
-				                    	case 2: // cancelar evento existente
+				                    	case 2: // eliminar un evento de la lista
 				                    		
-				                    		deFiesta.cancelarEvento(divorcio);
+											    Console.WriteLine("Ingrese el número del evento que desea cancelar:");
+											    int numeroEventoCancelar = int.Parse(Console.ReadLine()); 								     // <--- el valor lo decide el usuario.
+											
+											    if (numeroEventoCancelar >= 1 && numeroEventoCancelar <= deFiesta.cantidadEvento()) 	     // <--- si el numero que puso el usuario es mayor o igual a la posición inicial y menor e igual a la cantidad total de elementos que hay dentro de la lista:           
+											    {
+											        Evento eventoCancelar = deFiesta.IndiceEvento(numeroEventoCancelar - 1); 				 // <--- el metodo retorna el objeto colocado en la posición determinada por el usuario. en el metodo se ve de esta manera -> return (Evento) this.listaEventos[""numeroEventoCancelar""];           
+											        deFiesta.cancelarEvento(eventoCancelar); 												 // <--- elimina el elemento retornado
+											        Console.WriteLine("El evento '" + eventoCancelar.NombreEvento + "' ha sido cancelado."); // <--- lo muestra por consola
+											    }
+											    else
+											    {
+											        Console.WriteLine("Número de evento inválido. Por favor, ingrese un número válido.");
+											    }
 				                    		
-				                    		Console.WriteLine("\nRealizado\n");
 				                    		break;
 				                    		
 				                    	case 3: // ver eventos
-				                    		
-				                    		deFiesta.verEventos();
-				                    		
-				                    		Console.WriteLine("si");
+
+											int contador = 1;
+											
+											Console.WriteLine("Lista de Eventos:");
+											foreach (Evento evento in eventos)
+											{
+											    Console.WriteLine("\n\n" + contador + ". Evento de: " + evento.NombreEvento + " - Fecha: " + evento.Fecha.ToString("dd/MM/yyyy") + "\n\n"); // intercambia los valores char por los items dentro del objeto Fecha (tipo DateTime)
+											    contador++;
+											}
 				                    		break;
 				                    		
-				                    	case 4: // indice evento
-				                    		
-				                    		
+				                    	case 4:  // mostrar posicion de un evento
 				                    		try {
-				                    			
-				                    			Console.WriteLine("\nque posicion deseas llamar?\n");
-				                    			int llamarPos = int.Parse(Console.ReadLine());
-				                    		
-				                    		
-				                    			deFiesta.IndiceEvento(llamarPos);
-				                    			
-				                    			Console.WriteLine("\nRealizado\n");
-				                    						                    			
-				                    		} catch (System.ArgumentOutOfRangeException) {
-				                    			
-				                    			Console.WriteLine("\nno existe tal posicion\n");
-				                    		}
+
+										   		Console.WriteLine("\nque posicion deseas llamar? \n");
+										   		int llamarPos = int.Parse(Console.ReadLine()); // decide el usuario
+										   	
+										   		Evento retornarPos = deFiesta.IndiceEvento(llamarPos); // la definición del metodo es: public EVENTO indiceEvento ---> de qué tipo va a ser la variable que guarda el valor retornado? de tipo evento.
+										   		
+										   		Console.WriteLine("\nEvento de: " + retornarPos.NombreEvento + ". \n\nFecha: " + retornarPos.Fecha.ToString("dd/MM/yyyy") + ". \n\nDNI: " + retornarPos.Dni + ". \n\nEncargado: " + retornarPos.EncargadoEvento.Nombre + ". \n\nTipo de evento: " + retornarPos.TipoEvento + "\n\n");
+
+												
+										   	} catch (System.ArgumentOutOfRangeException) {
+										   		Console.WriteLine("\nno existe tal posicion \n");
+											}
 				                    		
 				                    		break;
 				                    		
+				                    	default: // volver atras. (28/10/2023): eliminé case 5 y 6
 				                    		
-				                    	case 5: // ver si existe un evento
-				                    		
-				                    		deFiesta.ExistenciaEvento(divorcio);
-				                    		
-				                    		Console.WriteLine("\nRealizado\n");
-				                    		break;
-				                    		
-				                    	case 6: // contar cantidad de Eventos
-				                    		
-				                    		deFiesta.cantidadEvento();
-				                    		
-				                    		Console.WriteLine("\nRealizado\n");
-				                    		break;
-				                    			
-				                    	default: // volver atras
 				                			salir1 = true;
+				                			
 				                    		break;
 				                    		
 				                    } // switch case 1
@@ -133,17 +197,137 @@ namespace Trabajo_Practico_Algoritmos
                             
                             break;
  
-                        case 2:
-                            Console.WriteLine("Has elegido la opción 2");
+                        case 2: // administrar servicios.
+                            Console.WriteLine("\nHas elegido administrar los servicios.\n\n");
+                            
+                            bool salir2 = false;
+                            
+                            while (!salir2) {
+                            	// MENU
+                            	
+                            	try {
+	                            	Console.WriteLine("1.");
+	                            	Console.WriteLine("2.");
+	                            	Console.WriteLine("3.");
+	                            	Console.WriteLine("4.");
+	                            	Console.WriteLine("5.");
+
+	                            	Console.WriteLine("\nelige una opcion: \n");
+                            		int opcion2 = int.Parse(Console.ReadLine());
+                            		
+                            		switch (opcion2) {
+                            			case 1:
+                            				break;
+                            			case 2:
+                            				break;
+                            			case 3:
+                            				break;
+                            			case 4:
+                            				break;
+                            			case 5:
+                            				salir2 = true;
+                            				break;
+                            			
+                            			default:
+                            				
+                            				break;
+                            		}
+                            	} catch (FormatException e) {
+									Console.WriteLine(e.Message);
+                            	}
+
+                            }
                             break;
  
-                        case 3:
-                            Console.WriteLine("Has elegido la opción 3");
+                        case 3: // administrar empleados.
+                            Console.WriteLine("\nHas elegido administrar los empleados\n\n");
+                            
+                            bool salir3 = false;
+                            
+                            while (!salir3) {
+                            	// MENU
+                            	
+                            	try {
+	                            	Console.WriteLine("1.");
+	                            	Console.WriteLine("2.");
+	                            	Console.WriteLine("3.");
+	                            	Console.WriteLine("4.");
+	                            	Console.WriteLine("5.");
+
+	                            	Console.WriteLine("\nelige una opcion: \n");
+                            		int opcion3 = int.Parse(Console.ReadLine());
+                            		
+                            		switch (opcion3) {
+                            			case 1:
+                            				break;
+                            			case 2:
+                            				break;
+                            			case 3:
+                            				break;
+                            			case 4:
+                            				break;
+                            			case 5:
+                            				salir3 = true;
+                            				break;
+                            			
+                            			default:
+                            				
+                            				break;
+                            		}
+                            	} catch (FormatException e) {
+									Console.WriteLine(e.Message);
+                            	}
+
+                            }
                             break;
-                        case 4:
-                            Console.WriteLine("Has elegido salir de la aplicación");
-                            salir = true;
+                            
+                        case 4: // administrar impresiones.
+                            Console.WriteLine("\nHas elegido administrar impresión\n\n");
+                            
+                            bool salir4 = false;
+                            
+                            while (!salir4) {
+                            	// MENU
+                            	
+                            	try {
+	                            	Console.WriteLine("1.");
+	                            	Console.WriteLine("2.");
+	                            	Console.WriteLine("3.");
+	                            	Console.WriteLine("4.");
+	                            	Console.WriteLine("5.");
+
+	                            	Console.WriteLine("\nelige una opcion: \n");
+                            		int opcion4 = int.Parse(Console.ReadLine());
+                            		
+                            		switch (opcion4) {
+                            			case 1:
+                            				break;
+                            			case 2:
+                            				break;
+                            			case 3:
+                            				break;
+                            			case 4:
+                            				break;
+                            			case 5:
+                            				salir4 = true;
+                            				break;
+                            			
+                            			default:
+                            				
+                            				break;
+                            		}
+                            	} catch (FormatException e) {
+									Console.WriteLine(e.Message);
+                            	}
+
+                            }
                             break;
+                            
+                        case 5:
+                        	Console.WriteLine("\nHas elegido salir de la aplicación");
+                        	salir = true;
+                    		break;
+                    		
                         default:
                             Console.WriteLine("Elige una opcion entre 1 y 4");
                             break;
@@ -161,7 +345,7 @@ namespace Trabajo_Practico_Algoritmos
 			
 			
 			
-			Console.Write("Press any key to continue . . . ");
+			Console.Write("\nPress any key to continue . . . ");
 			Console.ReadKey(true);
 		}
 	}
@@ -191,7 +375,7 @@ namespace Trabajo_Practico_Algoritmos
 		public ArrayList ListaEventos
 		{
 			get { return listaEventos; }
-			set { listaEventos = value; }
+			// set { listaEventos = value; }
 		}
 
 		public ArrayList ListaEmpleados
@@ -239,15 +423,13 @@ namespace Trabajo_Practico_Algoritmos
 			this.listaEventos.Add(a);
 		}
 
-		public void ArrayList verEventos()
+		public ArrayList verEventos()
 		{
-			foreach (var element in listaEventos) {
-				Console.WriteLine(element);
-			}
+			return this.listaEventos;
 		}
 
 		public Evento IndiceEvento(int pos)
-		{
+		{	
 			return (Evento)this.listaEventos[pos];
 		}
 
