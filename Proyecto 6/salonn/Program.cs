@@ -15,7 +15,12 @@ namespace Trabajo_Practico_Algoritmos
 			
 			Encargado walter = new Encargado("Walter", "Gonzalez", 41000222, "Propietario", 120000); // encargado default
 			
-			Empleado em1 = new Empleado("Daiana", "Aguilera", "cocinera", 17235444,  60000); // empleado default
+			Empleado em1 = new Empleado("Daiana", "Aguilera", "Cocinera", 17235444,  60000); // empleado default
+			Empleado em2 = new Empleado("Manuel", "Telechea", "Bar tender", 38781313, 15777555);
+			Empleado em3 = new Empleado("Flavio", "Gonzalez", "Bachero", 45624032, 20);
+			Empleado em4 = new Empleado("Cacho", "Gutierrez", "Cantante", 25322154, 60000);
+			Empleado em5 = new Empleado("Maria Jose", "Hernandez", "Tejedora", 35893251, 78787);
+			Empleado em6 = new Empleado("Carlos Alberto", "Roberto", "Jefe", 24789112, 2000);
 
 			// Crear eventos
 			
@@ -36,27 +41,15 @@ namespace Trabajo_Practico_Algoritmos
 			deFiesta.reservarEvento(evento5);
 
 	        // Agregar servicios a los eventos
-	        
-	        Servicio catering = new Servicio("Catarina Catering", "Catering", "Ofrecemos deliciosos platos", 15, 2000);
-
-	        Servicio musica = new Servicio("Orquesta en Vivo", "Música", "Banda en vivo para el evento", 1, 5000);
-
-	        Servicio decoracion = new Servicio("Decoración Temática", "Decoración", "Decoración especializada", 1, 3000);
-
-	        Servicio fotografia = new Servicio("Servicio de Fotografía", "Fotografía", "Fotógrafo profesional para el evento", 1, 2500);
-
-	        Servicio barraLibre = new Servicio("Barra Libre de Bebidas", "Bebidas", "Variedad de bebidas para los invitados", 1, 3500);
 			
 			Encargado encargado = new Encargado("walter", "gonzalez", 41000222, "soy encargado", 120000);
 			Evento divorcio = new Evento("divorcio de los padres de flavio" , "divorcio", "3030303", new DateTime(2023, 10, 10));
 			Servicio se1 = new Servicio("catarina catering", "catering", "hago catering", 15, 2000);
-			Servicio se2 = new Servicio("catarina catering", "catering", "hago catering", 15, 2000);
-			Servicio se3 = new Servicio("catarina catering", "catering", "hago catering", 15, 2000);
 			
 			deFiesta.reservarEvento(divorcio);
+			
 			divorcio.agregarServicio(se1);
-			divorcio.agregarServicio(se2);
-			divorcio.agregarServicio(se3);
+			
 			divorcio.EncargadoEvento = encargado;
 			
 			
@@ -116,7 +109,7 @@ namespace Trabajo_Practico_Algoritmos
 				                    		int opcionA;
 				                    		do
 				                    		{
-				                    			Console.WriteLine("Seleccione Una opción de evento: \n1- Bautismo \n2-Cumpleaños \n3- Fiesta de Quince \n4-Despedida de Soltera/o \n5- Casamiento \n6- Salir");
+				                    			Console.WriteLine("Seleccione Una opción de evento: \n1. Bautismo \n2. Cumpleaños \n3. Fiesta de Quince \n4. Despedida de Soltera/o \n5. Casamiento \n6. Salir");
 				                    			opcionA = int.Parse(Console.ReadLine());
 				                    			string nombreEv,dniCli;
 				                    			int dia, mes;
@@ -154,7 +147,7 @@ namespace Trabajo_Practico_Algoritmos
 											    }
 
 				                    			
-				                    			Console.WriteLine("¿Para que fecha quiere reservar el evento?");
+				                    			Console.WriteLine("¿Para que fecha quiere reservar el evento?\n");
 				                    					
 				                    					try
 														{
@@ -171,9 +164,9 @@ namespace Trabajo_Practico_Algoritmos
 														    {
 														        throw new FormatException("Día inválido. Por favor, ingrese un número entero válido entre 1 y 31.");
 														    }
-														
+														    
 														    fecha = new DateTime(agno, mes, dia);
-														    Console.WriteLine("Fecha ingresada correctamente: " + fecha.ToString());
+														    Console.WriteLine("Fecha ingresada correctamente: " + fecha.ToString() + "\n\n");
 														}
 														catch (FormatException e)
 														{
@@ -183,20 +176,20 @@ namespace Trabajo_Practico_Algoritmos
 				                    					
 				                    			Console.Write("Ingrese su nombre: ");
 				                    			nombreEv = Console.ReadLine();
-				                    			Console.Write("Para finalizar, ingrese su DNI.");
+				                    			Console.Write("Para finalizar, ingrese su DNI: ");
 				                    			dniCli= Console.ReadLine();
 				                    			
 				                    			if(dniCli.Length == 8)
 				                    			{
 				                    				
-				                    				Console.WriteLine("El evento se ha agregado con éxito.");
+				                    				Console.WriteLine("El evento se ha agregado con éxito. \n\n");
 				                    				Evento evento = new Evento(nombreEv, tipoEv, dniCli, fecha);
 				                    				deFiesta.reservarEvento(evento);
 				                    			}
 				                    			
 				                    			else
 				                    			{
-				                    				Console.WriteLine("Ingrese un DNI válido, debe incluir 8 carácteres y ser todos números.");
+				                    				Console.WriteLine("Ingrese un DNI válido, debe incluir 8 carácteres y ser todos números. \n\n");
 				                    				dniCli= Console.ReadLine();
 				                    			}
 				                    			
@@ -219,13 +212,21 @@ namespace Trabajo_Practico_Algoritmos
 											    }
 											    else
 											    {
-											        Console.WriteLine("Número de evento inválido. Por favor, ingrese un número válido.");
+											        Console.WriteLine("\nNúmero de evento inválido. Por favor, ingrese un número válido.\n\n");
 											    }
 				                    		
 				                    		break;
 				                    		
 				                    	case 3: // ver eventos
-				                    		deFiesta.verEventos();
+				                    		ArrayList eventos = deFiesta.verEventos();
+											int contador = 1;
+											
+											Console.WriteLine("Lista de Eventos:");
+											foreach (Evento evento in eventos)
+											{
+											    Console.WriteLine(contador + ". Evento: " + evento.NombreEvento + " - Cliente: " + evento.Dni + " - Fecha: " + evento.Fecha.ToString("dd/MM/yyyy") + "\n");
+											    contador++;
+											}
 												
 				                    		break;
 				                    		
@@ -247,7 +248,6 @@ namespace Trabajo_Practico_Algoritmos
 				                    	default: // volver atras. (28/10/2023): eliminé case 5 y 6
 				                    		
 				                			salir1 = true;
-				                			
 				                    		break;
 				                    		
 				                    } // switch case 1
@@ -268,29 +268,282 @@ namespace Trabajo_Practico_Algoritmos
                             
                             bool salir2 = false;
                             
+                            
+                            // ADVERTENCIA PARA LOS OJOS: mucha repetición de codigo de aqui en adelante!!! funcion requerida q posiblemente arme dsp, requiere estas variables:
+                            int contadorServicio;
+        					int LlamarPos;
+        					Evento eventoSeleccionado;
+    						ArrayList eventosServicios;
+                        
                             while (!salir2) {
                             	// MENU
                             	
                             	try {
-	                            	Console.WriteLine("1.");
-	                            	Console.WriteLine("2.");
-	                            	Console.WriteLine("3.");
-	                            	Console.WriteLine("4.");
-	                            	Console.WriteLine("5.");
+	                            	Console.WriteLine("1. agregar servicio");
+	                            	Console.WriteLine("2. eliminar servicio");
+	                            	Console.WriteLine("3. ver servicios");
+	                            	Console.WriteLine("4. salir");
 
 	                            	Console.WriteLine("\nelige una opcion: \n");
                             		int opcion2 = int.Parse(Console.ReadLine());
                             		
                             		switch (opcion2) {
                             			case 1:
+                            				
+                            				int agregarServicio;
+                            				
+                            				do {
+                            					Console.WriteLine("Seleccione el tipo de servicio: \n1. Catering, costo 300 \n2. Bebida, costo: 500 \n3. Bachero, costo: 1 \n4. Tropical, costo: 400 \n5. Inflables, costo: 1500 \n6. Barra-brava, costo: 2000 \n7. Salir \n\n");
+                            					agregarServicio = int.Parse(Console.ReadLine());
+                            					
+                            					string tipoServicio, nombreServicio, DescripcionServicio;
+                            					int cantidadServicio;
+                            					double costoInicial;
+                            					Servicio servicioNuevo;
+                            					
+                            					switch (agregarServicio) {
+                            						case 1:
+                            							nombreServicio = "Catarina Entertainment";
+                            							tipoServicio = "Catering";
+                            							costoInicial = 300;
+                            							Console.WriteLine("Definí la cantidad del servicio que necesitas: ");
+                            							cantidadServicio = int.Parse(Console.ReadLine());
+                            							DescripcionServicio = "- Servicio de 'Catarina Entertainment' \n- Empleado: " + em1.Nombre + " " + em2.Apellido + "\n- la empresa proporciona: Veneno para ratas, un guaymallen de la escuela n° 12 y un hibuprofeno 600 \n- al extender la cantidad del servicio, sumaremos la cantidad de empleados que necesitemos.";
+                            							
+                            							// aca se agrega el servicio
+                            							servicioNuevo = new Servicio(nombreServicio, tipoServicio, DescripcionServicio, cantidadServicio, costoInicial);
+                            							Console.WriteLine("Defina con un numero al evento que desea añadirle el servicio: \n"); // me parece q con un if es mejor asi valida cuando ponen un string
+														eventosServicios = deFiesta.verEventos();
+														contadorServicio = 1;
+														Console.WriteLine("Lista de Eventos:");
+														foreach (Evento evento in eventosServicios)
+														{
+														    Console.WriteLine(contadorServicio + ". Evento: " + evento.NombreEvento + " - Cliente: " + evento.Dni + " - Fecha: " + evento.Fecha.ToString("dd/MM/yyyy") + "\n");
+														    contadorServicio++;
+														}
+														LlamarPos = int.Parse(Console.ReadLine());
+														eventoSeleccionado = deFiesta.IndiceEvento(LlamarPos - 1);
+														eventoSeleccionado.agregarServicio(servicioNuevo);
+														Console.WriteLine("Servicio Agregado a su evento Correctamente. costo final: " + servicioNuevo.CostoFinal + "\n\n"); // AGREGA EL SERVICIO
+                            							break;
+                            							
+                            							
+                            						case 2:
+                            							nombreServicio = "Manuel Barras";
+                            							tipoServicio = "Bebida";
+                            							costoInicial = 500;
+                            							cantidadServicio = 1;
+                            							DescripcionServicio = "- Servicio proporcionado por 'Manuel Barras' \n- Empleado: " + em2.Nombre + " " + em2.Apellido + "\n- Cócteles: Gin Lima, Destornillador, Mula de Moscú, Cherry Blossom, Cosmopolitan, Sex on the beach, Permatrago \n- notas del Empleado: les juro que la bebida no contiene ningún tipo de leche.";
+                            							
+                            							// aca se agrega el servicio
+                            							servicioNuevo = new Servicio(nombreServicio, tipoServicio, DescripcionServicio, cantidadServicio, costoInicial);
+                            							Console.WriteLine("Defina con un numero al evento que desea añadirle el servicio: \n");
+														eventosServicios = deFiesta.verEventos();
+														contadorServicio = 1;
+														Console.WriteLine("Lista de Eventos:");
+														foreach (Evento evento in eventosServicios)
+														{
+														    Console.WriteLine(contadorServicio + ". Evento: " + evento.NombreEvento + " - Cliente: " + evento.Dni + " - Fecha: " + evento.Fecha.ToString("dd/MM/yyyy") + "\n");
+														    contadorServicio++;
+														}
+														LlamarPos = int.Parse(Console.ReadLine());
+														eventoSeleccionado = deFiesta.IndiceEvento(LlamarPos - 1);
+														eventoSeleccionado.agregarServicio(servicioNuevo);
+														Console.WriteLine("Servicio Agregado a su evento Correctamente. \n\n"); // AGREGA EL SERVICIO
+                            							break;
+                            							
+                            							
+                            						case 3:
+                            							nombreServicio = "Restaurante Hierbabuena";
+                            							tipoServicio = "Bachero";
+                            							costoInicial = 1;
+                            							Console.WriteLine("Definí la cantidad del servicio que necesitas: ");
+                            							cantidadServicio = int.Parse(Console.ReadLine());
+                            							DescripcionServicio = "- Servicio Proporcionado por 'Restaurante Hierbabuena' \n- Empleado: " +  em3.Nombre + " " + em3.Apellido + "\n- al extender la cantidad del servicio, sumaremos la cantidad de empleados que necesitemos.";
+                            							
+                            							// aca se agrega el servicio
+                            							servicioNuevo = new Servicio(nombreServicio, tipoServicio, DescripcionServicio, cantidadServicio, costoInicial);
+                            							Console.WriteLine("Defina con un numero al evento que desea añadirle el servicio: \n"); 
+														eventosServicios = deFiesta.verEventos();
+														contadorServicio = 1;
+														Console.WriteLine("Lista de Eventos:");
+														foreach (Evento evento in eventosServicios)
+														{
+														    Console.WriteLine(contadorServicio + ". Evento: " + evento.NombreEvento + " - Cliente: " + evento.Dni + " - Fecha: " + evento.Fecha.ToString("dd/MM/yyyy") + "\n");
+														    contadorServicio++;
+														}
+														LlamarPos = int.Parse(Console.ReadLine());
+														eventoSeleccionado = deFiesta.IndiceEvento(LlamarPos - 1);
+														eventoSeleccionado.agregarServicio(servicioNuevo);
+														Console.WriteLine("Servicio Agregado a su evento Correctamente. \n\n"); // AGREGA EL SERVICIO
+                            							break; // break
+                            							
+                            							
+                            						case 4:
+                            							nombreServicio = "Cacho Mimoso";
+                            							tipoServicio = "Tropical";
+                            							costoInicial = 400;
+                            							cantidadServicio = 1;
+                            							DescripcionServicio = "- Servicio Proporcionado por 'Cacho Mimoso' \n- Empleado: " + em4.Nombre + " " + em4.Apellido + "\n- Canciones que toco: \n\n-- 'Yo me enamoré' \n-- 'Te vas a arrepentir' \n-- 'Y Ahota Te Vas' \n-- 'Choque 2' \n-- 'Doble Vida' \n-- 'El Mas Popular' \n-- 'Dios me libre' \n-- 'Amores como el nuestro' \n-- 'Como pude amarla' \n-- 'Loquito por ti'  \n-- 'Como Me Voy A Olvidar' \n-- 'No Me Arrepiento De Este Amor' \n\n- Notas del Cantante: 'Cuando me quedo sin el instrumento empiezo a tararear loco, no me importa nada.'";
+                            							
+                            							// aca se agrega el servicio
+                            							servicioNuevo = new Servicio(nombreServicio, tipoServicio, DescripcionServicio, cantidadServicio, costoInicial);
+                            							Console.WriteLine("Defina con un numero al evento que desea añadirle el servicio: \n");
+														eventosServicios = deFiesta.verEventos();
+														contadorServicio = 1;
+														Console.WriteLine("Lista de Eventos:");
+														foreach (Evento evento in eventosServicios)
+														{
+														    Console.WriteLine(contadorServicio + ". Evento: " + evento.NombreEvento + " - Cliente: " + evento.Dni + " - Fecha: " + evento.Fecha.ToString("dd/MM/yyyy") + "\n");
+														    contadorServicio++;
+														}
+														
+														LlamarPos = int.Parse(Console.ReadLine());
+														eventoSeleccionado = deFiesta.IndiceEvento(LlamarPos - 1);
+														eventoSeleccionado.agregarServicio(servicioNuevo);
+														Console.WriteLine("Servicio Agregado a su evento Correctamente. \n\n"); // AGREGA EL SERVICIO
+                            							break; // break
+                            						case 5:
+                            							nombreServicio = "Sarandí de los inflables";
+                            							tipoServicio = "Inflables";
+                            							costoInicial = 1500;
+                            							Console.WriteLine("Definí la cantidad del servicio que necesitas: ");
+                            							cantidadServicio = int.Parse(Console.ReadLine());
+                            							
+                            							DescripcionServicio = "- Servicio Proporcionado por 'Sarandí de los inflables' \n- Empleado: " + em5.Nombre + " " + em5.Apellido + "\n- Material utilizado: Lona, Nailon para las redes, equipo de motor, soplador monofásico y una turbina. \n- Nota: mi hija me rompió el castillo de Anor Londo, por lo que queda deshabilitado temporalmente como opción negociable";
+                            							
+                            							// aca se agrega el servicio
+                            							servicioNuevo = new Servicio(nombreServicio, tipoServicio, DescripcionServicio, cantidadServicio, costoInicial);
+                            							Console.WriteLine("Defina con un numero al evento que desea añadirle el servicio: \n");
+														eventosServicios = deFiesta.verEventos();
+														contadorServicio = 1;
+														Console.WriteLine("Lista de Eventos:");
+														foreach (Evento evento in eventosServicios)
+														{
+														    Console.WriteLine(contadorServicio + ". Evento: " + evento.NombreEvento + " - Cliente: " + evento.Dni + " - Fecha: " + evento.Fecha.ToString("dd/MM/yyyy") + "\n");
+														    contadorServicio++;
+														}
+														
+														LlamarPos = int.Parse(Console.ReadLine());
+														eventoSeleccionado = deFiesta.IndiceEvento(LlamarPos - 1);
+														eventoSeleccionado.agregarServicio(servicioNuevo);
+														Console.WriteLine("Servicio Agregado a su evento Correctamente. \n\n"); // AGREGA EL SERVICIO
+                            							break; // break
+                            							
+                            							
+                            						case 6:
+                            							nombreServicio = "LA BARRA 14";
+                            							tipoServicio = "Barra Brava";
+                            							costoInicial = 2000;
+                            							cantidadServicio = 1;
+                            							DescripcionServicio = "- Servicio Proporcionado por 'LA BARRA 14' \n- Empleado: " + em6.Nombre + " " + em6.Nombre + "\n- Condiciones: \n\n1. si so' de banfield te vamo' a buscar. \n\n- Te bancamos el presunto divorcio con las siguientes canciones: \n\n-- 'Alentando me quiero morir' \n-- 'Despacito' \n-- 'Grana, Mi Buen Amigo' \n-- 'La 14 Siempre Va' \n-- 'La Barra 14 siempre es una fiesta' \n-- 'La 14 del Tablón' \n-- 'Que Te Pasa Taladro' \n-- 'Señores Dejo Todo, Que Me Voy A Ver Al Grana' \n-- 'Vamos Vamos Vamos Los Granates' ";
+                            							
+                            							// aca se agrega el servicio
+                            							servicioNuevo = new Servicio(nombreServicio, tipoServicio, DescripcionServicio, cantidadServicio, costoInicial);
+                            							Console.WriteLine("Defina con un numero al evento que desea añadirle el servicio: \n");
+														eventosServicios = deFiesta.verEventos();
+														contadorServicio = 1;
+														Console.WriteLine("Lista de Eventos:");
+														foreach (Evento evento in eventosServicios)
+														{
+														    Console.WriteLine(contadorServicio + ". Evento: " + evento.NombreEvento + " - Cliente: " + evento.Dni + " - Fecha: " + evento.Fecha.ToString("dd/MM/yyyy") + "\n");
+														    contadorServicio++;
+														}
+														LlamarPos = int.Parse(Console.ReadLine());
+														eventoSeleccionado = deFiesta.IndiceEvento(LlamarPos - 1);
+														eventoSeleccionado.agregarServicio(servicioNuevo);
+														Console.WriteLine("Servicio Agregado a su evento Correctamente. \n\n"); // AGREGA EL SERVICIO
+                            							break;
+                            							
+                            							
+                            						case 7:
+                            							agregarServicio = 0;
+                            							break;
+                            							
+                            						default:
+                            							Console.WriteLine("Ingrese una opción válida.");
+                            							break;
+                            					} 
+												
+                            					Console.WriteLine();
+                            					
+                            					
+                            				} while (agregarServicio != 0);
+                            				
+                            				
                             				break;
-                            			case 2:
+                            				
+                            				
+                            			case 2: // eliminar servicio
+                            				Console.WriteLine("Defina con un numero el evento que desea eliminarle un servicio: \n");
+                            				
+											eventosServicios = deFiesta.verEventos();
+											
+											contadorServicio = 1;
+											
+											Console.WriteLine("Lista de Eventos:");
+											
+											foreach (Evento evento in eventosServicios)
+											{
+											    Console.WriteLine(contadorServicio + ". Evento: " + evento.NombreEvento + " - Cliente: " + evento.Dni + " - Fecha: " + evento.Fecha.ToString("dd/MM/yyyy") + "\n");
+											    contadorServicio++;
+											}
+											
+											LlamarPos = int.Parse(Console.ReadLine());
+											
+											eventoSeleccionado = deFiesta.IndiceEvento(LlamarPos - 1);
+											
+											
+											Console.WriteLine("Defina con un numero el servicio que desea eliminarle: ");
+											
+
+											ArrayList listaServicios = eventoSeleccionado.verServicio();
+											contadorServicio = 1;
+												
+											Console.WriteLine("Lista de Servicios: ");
+											
+											foreach (Servicio servicio in listaServicios) {
+												Console.WriteLine(contadorServicio + ". Descripcion del servicio: \n" + servicio.DescripcionServicio + ".\n\nCosto: " + servicio.CostoFinal + "\n");
+												contadorServicio++;
+											}
+
+											
                             				break;
-                            			case 3:
+                            				
+                            			case 3: // ver servicios
+                            				Console.WriteLine("\n\n\nDefina con un numero el evento que desea eliminarle un servicio: \n");
+                            				
+											eventosServicios = deFiesta.verEventos();
+											
+											contadorServicio = 1;
+											
+											Console.WriteLine("Lista de Eventos:");
+											
+											foreach (Evento evento in eventosServicios)
+											{
+											    Console.WriteLine(contadorServicio + ". Evento: " + evento.NombreEvento + " - Cliente: " + evento.Dni + " - Fecha: " + evento.Fecha.ToString("dd/MM/yyyy") + "\n");
+											    contadorServicio++;
+											}
+											
+											LlamarPos = int.Parse(Console.ReadLine());
+											
+											eventoSeleccionado = deFiesta.IndiceEvento(LlamarPos - 1);
+											
+											listaServicios = eventoSeleccionado.verServicio();
+											
+											contadorServicio = 1;
+												
+											Console.WriteLine("\nLista de Servicios: \n");
+											
+											foreach (Servicio servicio in listaServicios) {
+												Console.WriteLine(contadorServicio + ". Descripcion del servicio: \n" + servicio.DescripcionServicio + ".\n\nCosto: " + servicio.CostoFinal + "\n");
+												contadorServicio++;
+											}
+                            				
+                            				
                             				break;
+
                             			case 4:
-                            				break;
-                            			case 5:
                             				salir2 = true;
                             				break;
                             			
@@ -325,14 +578,19 @@ namespace Trabajo_Practico_Algoritmos
                             		
                             		switch (opcion3) {
                             			case 1:
+                            				
                             				break;
                             			case 2:
+                            				
                             				break;
                             			case 3:
+                            				
                             				break;
                             			case 4:
+                            				
                             				break;
                             			case 5:
+                            				
                             				salir3 = true;
                             				break;
                             			
@@ -489,14 +747,9 @@ namespace Trabajo_Practico_Algoritmos
 			this.listaEventos.Add(a);
 		}
 
-		public void verEventos()
+		public ArrayList verEventos() // lo devolví a la normalidad pq necesito que retorne la lista asi la tengo a mano para agregar los servicios, no puedo simplemente imprimir los eventos. sepa entender señor walter(?
 		{
-			foreach (Evento el in listaEventos) {
-				Console.WriteLine("\nEvento {0}:\nNombre del evento: {1}\nFecha del evento{2}\nEncargado del evento: {3} {4}", el.ID, el.NombreEvento, el.Fecha,el.EncargadoEvento.Nombre, el.EncargadoEvento.Apellido);
-				Console.WriteLine("Lista de servicios: ");
-				el.verServicio();
-				Console.WriteLine("");
-			}
+			return this.listaEventos;
 		}
 
 		public Evento IndiceEvento(int pos)
@@ -519,11 +772,11 @@ namespace Trabajo_Practico_Algoritmos
     public class Evento
 	{
 		// variables
-		private static int contador =0; 						//se autoincrementa asignando un identificador a cada evento agregago.
+		private static int contador =0; 						// se autoincrementa asignando un identificador a cada evento agregado.
 		private DateTime fecha;
 		private string nombreEvento;
 		private string tipoEvento;
-		private int id; 										//el identificador propio de cada evento.
+		private int id; 										// el identificador propio de cada evento.
 		private Encargado encargadoEvento;
 		
 		private string dni;
@@ -540,7 +793,7 @@ namespace Trabajo_Practico_Algoritmos
 			this.tipoEvento = tipoEvento;
 			this.dni= dni;
 			this.fecha = fecha;
-			this.id = contador++;  								//El id asignado sera el actual de la clase evento, luego se incrementa. En este caso el id, tambien esta relacionado con el indice dentro de la lista de eventos.
+			this.id = contador++;  								// El id asignado sera el actual de la clase evento, luego se incrementa. En este caso el id, tambien esta relacionado con el indice dentro de la lista de eventos.
 		
 			listaServicios = new ArrayList();
 		}
@@ -584,7 +837,7 @@ namespace Trabajo_Practico_Algoritmos
 		public ArrayList ListaServicios
 		{
 			get { return listaServicios; }
-			set { listaServicios = value; }
+			// set { listaServicios = value; }
 		}
 
 		
@@ -597,14 +850,9 @@ namespace Trabajo_Practico_Algoritmos
             return this.listaServicios.Contains(n); 
         }
 
-        public void verServicio()
+        public ArrayList verServicio()
         {
-        	int indice =1;
-        	foreach (Servicio el in this.listaServicios)
-        	{
-        		Console.WriteLine( indice +" "+ el.TipoServicio+" - "+ el.NombreServicio);
-        		indice++;
-        	}
+			return this.listaServicios;
         }
 
 		public Servicio indiceServicio(int pos)
