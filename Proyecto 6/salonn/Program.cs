@@ -15,7 +15,7 @@ namespace Trabajo_Practico_Algoritmos
 			
 			salon deFiesta = new salon(new ArrayList(), new ArrayList());
 			
-			Encargado walter = new Encargado("Walter", "Gonzalez", 41000222, "Propietario", 120000); // encargado default
+			Encargado en = new Encargado("Walter", "Gonzalez",  "Propietario",41000222, 120000); // encargado default
 			
 			Empleado em1 = new Empleado("Daiana", "Aguilera", "Cocinera", 17235444,  60000); // empleado default
 			Empleado em2 = new Empleado("Manuel", "Telechea", "Bar tender", 38781313, 15777555);
@@ -44,7 +44,7 @@ namespace Trabajo_Practico_Algoritmos
 
 	        // Agregar servicios a los eventos
 			
-			Encargado encargado = new Encargado("walter", "gonzalez", 41000222, "soy encargado", 120000);
+			Encargado encargado = new Encargado("walter", "gonzalez","soy encargado", 41000222 , 120000);
 			Evento divorcio = new Evento("divorcio de los padres de flavio" , "divorcio", "3030303", new DateTime(2023, 10, 10));
 			Servicio se1 = new Servicio("catarina catering", "catering", "hago catering", 15, 2000);
 			
@@ -60,6 +60,7 @@ namespace Trabajo_Practico_Algoritmos
 			deFiesta.agregarEmpleado(em4);
 			deFiesta.agregarEmpleado(em5);
 			deFiesta.agregarEmpleado(em6);
+			deFiesta.agregarEmpleado(en);
 			// metodos que retornan: los que no piden nada se guardan en variable aca para una utilización mas completa (por si quiero cierto valor en el case 1, ya tengo la variable cargada por ejemplo). los que piden condiciones se sentencian en el case determinado
 			
 			int eventoCantidad = deFiesta.cantidadEvento();
@@ -590,7 +591,7 @@ namespace Trabajo_Practico_Algoritmos
                             		switch (opcion3) {
                             			case 1:
                             				Console.WriteLine("Opción 1: \n*** VER LISTA DE EMPLEADOS ***");
-                            				foreach(Empleado em in deFiesta.ListaEmpleados)
+                            				foreach(Personal em in deFiesta.ListaEmpleados)
                             				{
                             					Console.WriteLine("Empleado: "+ em.Nombre + " " + em.Apellido+". \nDNI: " + em.DNI + "\nDesempeña la tarea: " + em.Tarea+", por la cual cobra un sueldo de $" + em.Sueldo +".\n");
                             				}
@@ -646,7 +647,7 @@ namespace Trabajo_Practico_Algoritmos
 											} while (!sueldoVal);
 											
 											
-											Empleado empleado = new Empleado(nombre, apellido, cargo, dni, sueldo);
+											Personal empleado = new Personal(nombre, apellido, cargo, dni, sueldo);
 											
 											Console.WriteLine("El empleado: " + empleado.Nombre + " " + empleado.Apellido + ". Cargo: " + empleado.Tarea + "\nHa sido agregado con éxito.");
 											deFiesta.agregarEmpleado(empleado);
@@ -655,9 +656,9 @@ namespace Trabajo_Practico_Algoritmos
                             				break;// dar de alta
                             			case 3:
                             				Console.WriteLine("Opción 3: \n*** DAR DE BAJA UN EMPLEADO ***\n\nA continuación tiene una lista de los empleados que tiene a disposicion. Elija su ID para eliminarlo.\n");
-                            				foreach(Empleado em in deFiesta.ListaEmpleados)
+                            				foreach(Personal em in deFiesta.ListaEmpleados)
                             				{
-                            					Console.WriteLine("Empleado: \nLegajo:"+em.Legajo+"\nNombre:"+ em.Nombre + " " + em.Apellido+"\nDNI: " + em.DNI + "\nTarea: " + em.Tarea+"\nSueldo$" + em.Sueldo +".");
+                            					Console.WriteLine("Empleado: "+em.Legajo+"\nNombre:"+ em.Nombre + " " + em.Apellido+"\nDNI: " + em.DNI + "\nTarea: " + em.Tarea+"\nSueldo $" + em.Sueldo +".\n\n");
                             				}
                             				int eleccion=0;
                             				
@@ -679,7 +680,7 @@ namespace Trabajo_Practico_Algoritmos
 											
 											} while (!opcionVal);
 											
-											foreach(Empleado em in deFiesta.ListaEmpleados)
+											foreach(Personal em in deFiesta.ListaEmpleados)
 											{
 												if(em.Legajo == eleccion)
 												{
@@ -726,7 +727,7 @@ namespace Trabajo_Practico_Algoritmos
 											
 											} while (!opcionVal2);
 											
-											foreach(Empleado em in deFiesta.ListaEmpleados)
+											foreach(Personal em in deFiesta.ListaEmpleados)
 											{
 												if(em.Legajo == eleccion2)
 												{
@@ -853,17 +854,17 @@ namespace Trabajo_Practico_Algoritmos
 
         // metodos
 
-        public void agregarEmpleado(Empleado e)
+        public void agregarEmpleado(Personal e)
         {
             this.listaEmpleados.Add(e);
         }
 
-		public void eliminarEmpleado(Empleado e)
+		public void eliminarEmpleado(Personal e)
 		{
 			this.listaEmpleados.Remove(e);
 		}
 
-		public Boolean existenciaEmpleado(Empleado e)
+		public Boolean existenciaEmpleado(Personal e)
 		{
 			return this.listaEmpleados.Contains(e);
 		}
@@ -873,11 +874,11 @@ namespace Trabajo_Practico_Algoritmos
 			return this.listaEmpleados.Count;
 		}
 
-		public Empleado IndiceEmpleado(int pos)
+		public Personal IndiceEmpleado(int pos)
 		{
 		    if (pos >= 0 && pos < listaEmpleados.Count)
 		    {
-		    	return (Empleado)listaEmpleados[pos];
+		    	return (Personal)listaEmpleados[pos];
 		    }
 		    else
 		    {
@@ -1086,7 +1087,7 @@ namespace Trabajo_Practico_Algoritmos
 	
 	
 	//Clase de empleado
-	public class Empleado
+	public class Personal
 	{
 		// variables
 		protected string nombre, apellido, descripcionTarea;
@@ -1097,7 +1098,7 @@ namespace Trabajo_Practico_Algoritmos
 		
 		// constructor
 
-		public Empleado(string nombre, string apellido, string descripcionTarea, int dni, double sueldo)
+		public Personal(string nombre, string apellido, string descripcionTarea, int dni, double sueldo)
 		{
 			this.nombre = nombre;
 			this.apellido = apellido;
@@ -1150,22 +1151,30 @@ namespace Trabajo_Practico_Algoritmos
 	//Clase para el Encargado, solo tenemos en cuenta el plus de su sueldo,
 	//	ya que menesteres como su funcion se heredan de la clase empleado
 	
-	public class Encargado : Empleado
+	public class Encargado : Personal
 	{
-		private double sueldo; // new para confirmar q estoy cumpliendo con el ocultamiento de la variable
+		private double plusSueldo = 0.1; // new para confirmar q estoy cumpliendo con el ocultamiento de la variable
 		
-		public Encargado(string nombre, string apellido, int dni, string descripcionTarea, double sueldo) : base(nombre, apellido, descripcionTarea, dni, sueldo)
+		public Encargado(string nombre, string apellido, string descripcionTarea,int dni, double sueldo) : base(nombre, apellido, descripcionTarea, dni, sueldo)
 		{
 			this.sueldo = sueldo;
 		}
 		
-		public double Sueldo {
+		public double PLUSSueldo {
 			get {
-				return sueldo;
+				return sueldo * plusSueldo;
 			}
 			set {
 				sueldo = value;
 			}
+		}
+		
+	}
+	public class Empleado : Personal
+	{
+		public Empleado(string nombre, string apellido , string descripcionTarea,int dni, double sueldo) : base(nombre, apellido, descripcionTarea, dni, sueldo)
+		{
+			
 		}
 	}
 }
