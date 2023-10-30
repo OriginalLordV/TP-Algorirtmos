@@ -16,3 +16,9 @@ C:\Users\Walter\Documents\TP-Algoritmos\TP-Algorirtmos\Proyecto 6\salonn\bin\Deb
 C:\Users\Walter\Documents\TP-Algoritmos\TP-Algorirtmos\Proyecto 6\salonn\bin\Debug\salonn.exe
 C:\Users\Walter\Documents\TP-Algoritmos\TP-Algorirtmos\Proyecto 6\salonn\bin\Debug\salonn.pdb
 C:\Users\Walter\Documents\TP-Algoritmos\TP-Algorirtmos\Proyecto 6\salonn\obj\Debug\salonn.pdb
+C:\Users\Mi PC\Desktop\SimpleTryout\TP-Algorirtmos\Class Eventos\TP-Algorirtmos\Proyecto 6\salonn\bin\Debug\salonn.exe.config
+C:\Users\Mi PC\Desktop\SimpleTryout\TP-Algorirtmos\Class Eventos\TP-Algorirtmos\Proyecto 6\salonn\bin\Debug\salonn.exe
+C:\Users\Mi PC\Desktop\SimpleTryout\TP-Algorirtmos\Class Eventos\TP-Algorirtmos\Proyecto 6\salonn\bin\Debug\salonn.pdb
+C:\Users\Mi PC\Desktop\SimpleTryout\TP-Algorirtmos\Class Eventos\TP-Algorirtmos\Proyecto 6\salonn\obj\Debug\salonn.csprojResolveAssemblyReference.cache
+C:\Users\Mi PC\Desktop\SimpleTryout\TP-Algorirtmos\Class Eventos\TP-Algorirtmos\Proyecto 6\salonn\obj\Debug\salonn.exe
+C:\Users\Mi PC\Desktop\SimpleTryout\TP-Algorirtmos\Class Eventos\TP-Algorirtmos\Proyecto 6\salonn\obj\Debug\salonn.pdb

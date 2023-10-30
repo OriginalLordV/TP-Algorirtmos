@@ -1,6 +1,8 @@
 ﻿
 using System;
 using System.Collections;
+using System.Linq;
+using System.Threading;
 using System.Security.Cryptography;
 
 namespace Trabajo_Practico_Algoritmos
@@ -52,7 +54,12 @@ namespace Trabajo_Practico_Algoritmos
 			
 			divorcio.EncargadoEvento = encargado;
 			
-			
+			deFiesta.agregarEmpleado(em1);
+			deFiesta.agregarEmpleado(em2);
+			deFiesta.agregarEmpleado(em3);
+			deFiesta.agregarEmpleado(em4);
+			deFiesta.agregarEmpleado(em5);
+			deFiesta.agregarEmpleado(em6);
 			// metodos que retornan: los que no piden nada se guardan en variable aca para una utilización mas completa (por si quiero cierto valor en el case 1, ya tengo la variable cargada por ejemplo). los que piden condiciones se sentencian en el case determinado
 			
 			int eventoCantidad = deFiesta.cantidadEvento();
@@ -93,14 +100,15 @@ namespace Trabajo_Practico_Algoritmos
                             
                             while (!salir1) {
 	                            try {
+                            		Console.WriteLine("\nElige una opción:\n");
                             		Console.WriteLine("1. Agregar mi evento");
 	                    			Console.WriteLine("2. Cancelar evento existente");
 				                    Console.WriteLine("3. Ver Eventos");
 				                    Console.WriteLine("4. Ver un Evento en especifico / mas detalles.");
 				                    
-				                    Console.WriteLine("5. Volver Atras");
+				                    Console.WriteLine("5. Volver atrás");
 				                    
-				                    Console.WriteLine("\nElige una opción:\n");
+				                    
 				                    int opcion1 = int.Parse(Console.ReadLine());
 				                    
 				                    switch (opcion1) {
@@ -109,7 +117,7 @@ namespace Trabajo_Practico_Algoritmos
 				                    		int opcionA;
 				                    		do
 				                    		{
-				                    			Console.WriteLine("Seleccione Una opción de evento: \n1. Bautismo \n2. Cumpleaños \n3. Fiesta de Quince \n4. Despedida de Soltera/o \n5. Casamiento \n6. Salir");
+				                    			Console.WriteLine("Seleccione Una opción de evento: \n1. Bautismo \n2. Cumpleaños \n3. Fiesta de Quince \n4. Despedida de Soltera/o \n5. Casamiento \n6. Volver atrás");
 				                    			opcionA = int.Parse(Console.ReadLine());
 				                    			string nombreEv,dniCli;
 				                    			int dia, mes;
@@ -197,7 +205,7 @@ namespace Trabajo_Practico_Algoritmos
 				                    		}
 				                    		while (opcionA != 0);
 				                    		
-				                    		break;
+				                    		break;//FIN DEL CASE 1
 				                    		
 				                    	case 2: // eliminar un evento de la lista
 				                    		
@@ -215,7 +223,7 @@ namespace Trabajo_Practico_Algoritmos
 											        Console.WriteLine("\nNúmero de evento inválido. Por favor, ingrese un número válido.\n\n");
 											    }
 				                    		
-				                    		break;
+				                    		break; //FIN DEL CASE 2
 				                    		
 				                    	case 3: // ver eventos
 				                    		ArrayList eventos = deFiesta.verEventos();
@@ -228,11 +236,11 @@ namespace Trabajo_Practico_Algoritmos
 											    contador++;
 											}
 												
-				                    		break;
+				                    		break; //FIN DEL CASE 3
 				                    		
 				                    	case 4:  // mostrar posicion de un evento
 				                    		try {
-										   		Console.WriteLine("\nque posicion deseas llamar? \n");
+										   		Console.WriteLine("\n¿Qué número de evento deseas ver? \n");
 										   		int llamarPos = int.Parse(Console.ReadLine()); // decide el usuario
 										   	
 										   		Evento retornarPos = deFiesta.IndiceEvento(llamarPos); // la definición del metodo es: public EVENTO indiceEvento ---> de qué tipo va a ser la variable que guarda el valor retornado? de tipo evento.
@@ -243,14 +251,14 @@ namespace Trabajo_Practico_Algoritmos
 										   	} catch (System.ArgumentOutOfRangeException) {
 										   		Console.WriteLine("\nno existe tal posicion \n");
 											}
-				                    		break;
+				                    		break; // FIN DEL CASE 4
 				                    		
 				                    	default: // volver atras. (28/10/2023): eliminé case 5 y 6
 				                    		
 				                			salir1 = true;
 				                    		break;
 				                    		
-				                    } // switch case 1
+				                    } // switch case 1 (opcion1)
 
 	                            } // try
                             
@@ -259,11 +267,11 @@ namespace Trabajo_Practico_Algoritmos
 					                    Console.WriteLine(e.Message);
 					                }
                             	
-                            } // while
+                            } // while 
                             
-                            break;
+                            break; //fin case 1 del MENU PRINCIPAL
  
-                        case 2: // administrar servicios.
+                        case 2: // administrar servicios. - - - - - - - - - - - - - - - - - - - - - - - - - - - INICIO CASE 2
                             Console.WriteLine("\nHas elegido administrar los servicios.\n\n");
                             
                             bool salir2 = false;
@@ -308,7 +316,7 @@ namespace Trabajo_Practico_Algoritmos
                             							costoInicial = 300;
                             							Console.WriteLine("Definí la cantidad del servicio que necesitas: ");
                             							cantidadServicio = int.Parse(Console.ReadLine());
-                            							DescripcionServicio = "- Servicio de 'Catarina Entertainment' \n- Empleado: " + em1.Nombre + " " + em2.Apellido + "\n- la empresa proporciona: Veneno para ratas, un guaymallen de la escuela n° 12 y un hibuprofeno 600 \n- al extender la cantidad del servicio, sumaremos la cantidad de empleados que necesitemos.";
+                            							DescripcionServicio = "- Servicio de 'Catarina Entertainment' \n- Empleado: " + em1.Nombre + " " + em1.Apellido + "\n- La empresa proporciona: Veneno para ratas, un guaymallen de la escuela n° 12 y un ibuprofeno 600 \n- al extender la cantidad del servicio, sumaremos la cantidad de empleados que necesitemos.";
                             							
                             							// aca se agrega el servicio
                             							servicioNuevo = new Servicio(nombreServicio, tipoServicio, DescripcionServicio, cantidadServicio, costoInicial);
@@ -567,35 +575,170 @@ namespace Trabajo_Practico_Algoritmos
                             	// MENU
                             	
                             	try {
-	                            	Console.WriteLine("1.");
-	                            	Console.WriteLine("2.");
-	                            	Console.WriteLine("3.");
-	                            	Console.WriteLine("4.");
-	                            	Console.WriteLine("5.");
+                            		
+                            		Console.WriteLine("\nelige una opcion: \n-----------------------------------------------------------------------\n");
+                            		
+	                            	Console.WriteLine("1. Ver empleados");
+	                            	Console.WriteLine("2. Dar de Alta un empleado");
+	                            	Console.WriteLine("3. Dar de Baja un empleado");
+	                            	Console.WriteLine("4. Ver cantidad de empleados");
+	                            	Console.WriteLine("5. Ver empleado por legajo");
+	                            	Console.WriteLine("6. Volver atrás");
 
-	                            	Console.WriteLine("\nelige una opcion: \n");
                             		int opcion3 = int.Parse(Console.ReadLine());
                             		
                             		switch (opcion3) {
                             			case 1:
-                            				
-                            				break;
+                            				Console.WriteLine("Opción 1: \n*** VER LISTA DE EMPLEADOS ***");
+                            				foreach(Empleado em in deFiesta.ListaEmpleados)
+                            				{
+                            					Console.WriteLine("Empleado: "+ em.Nombre + " " + em.Apellido+". \nDNI: " + em.DNI + "\nDesempeña la tarea: " + em.Tarea+", por la cual cobra un sueldo de $" + em.Sueldo +".\n");
+                            				}
+                            				break; //VEr empleados
                             			case 2:
+                            				string nombre, apellido, cargo;
+											int dni = 0;
+											double sueldo;
+											
+											Console.WriteLine("Opción 2: \n*** DAR DE ALTA UN EMPLEADO ***\n\nIngrese los datos pedidos a continuación para dar de alta al empleado nuevo.\n");
+											Console.WriteLine("Ingrese el nombre del empleado nuevo");
+											nombre = Console.ReadLine();
+											Console.WriteLine("Ingrese el apellido del empleado nuevo");
+											apellido = Console.ReadLine();
+											Console.WriteLine("Ingrese la tarea que desempeña el empleado nuevo");
+											cargo = Console.ReadLine();
+											
+											bool dniValido = false;
+											
+											do
+											{
+											    Console.WriteLine("Ingrese el DNI del empleado nuevo");
+											    string inputdni = Console.ReadLine();
+											
+											    if (inputdni.Length == 8 && inputdni.All(char.IsDigit))
+											    {
+											        dni = int.Parse(inputdni);
+											        dniValido = true;
+											    }
+											    else
+											    {
+											        Console.WriteLine("Ingrese un DNI válido, debe contener 8 dígitos y ser numérico.");
+											    }
+											
+											} while (!dniValido);
+											
+											bool sueldoVal= false;
+
+											do
+											{
+											    Console.WriteLine("Ingrese el sueldo del empleado nuevo");
+											    string inputSueldo = Console.ReadLine();
+											
+											    if (double.TryParse(inputSueldo, out sueldo))
+											    {
+											        sueldoVal = true;
+											    }
+											    else
+											    {
+											        Console.WriteLine("Ingrese un sueldo válido, debe ser un número.");
+											    }
+											
+											} while (!sueldoVal);
+											
+											
+											Empleado empleado = new Empleado(nombre, apellido, cargo, dni, sueldo);
+											
+											Console.WriteLine("El empleado: " + empleado.Nombre + " " + empleado.Apellido + ". Cargo: " + empleado.Tarea + "\nHa sido agregado con éxito.");
+											deFiesta.agregarEmpleado(empleado);
+
                             				
-                            				break;
+                            				break;// dar de alta
                             			case 3:
+                            				Console.WriteLine("Opción 3: \n*** DAR DE BAJA UN EMPLEADO ***\n\nA continuación tiene una lista de los empleados que tiene a disposicion. Elija su ID para eliminarlo.\n");
+                            				foreach(Empleado em in deFiesta.ListaEmpleados)
+                            				{
+                            					Console.WriteLine("Empleado: \nLegajo:"+em.Legajo+"\nNombre:"+ em.Nombre + " " + em.Apellido+"\nDNI: " + em.DNI + "\nTarea: " + em.Tarea+"\nSueldo$" + em.Sueldo +".");
+                            				}
+                            				int eleccion=0;
                             				
-                            				break;
+                            				bool opcionVal= false;
+
+											do
+											{
+											    Console.WriteLine("Ingrese el legajo del empleado que desea eliminar:");
+											    string inputElec = Console.ReadLine();
+											
+											    if (int.TryParse(inputElec, out eleccion))
+											    {
+											        opcionVal = true;
+											    }
+											    else
+											    {
+											        Console.WriteLine("Ingrese un legajo válido, debe ser un número, sin espacios ni letras.");
+											    }
+											
+											} while (!opcionVal);
+											
+											foreach(Empleado em in deFiesta.ListaEmpleados)
+											{
+												if(em.Legajo == eleccion)
+												{
+													Console.WriteLine("El empleado "+ em.Nombre+" "+em.Apellido+" coincide y será eliminado. . .");
+													deFiesta.eliminarEmpleado(em);
+													
+													break;
+												}
+											}
+											string texto = "//////////";
+											foreach (char c in texto)
+									        {
+									            Console.Write(texto);
+									            Thread.Sleep(100); 
+									        }
+
+        									Console.Write("100% . . ."); 
+											Console.WriteLine("Empleado eliminado con éxito.");
+											
+                            				break; //DAR DE BAJA
+                            			
                             			case 4:
-                            				
+                            				Console.WriteLine("Opción 4: \n*** VER CANTIDAD DE EMPLEADOS ***\n Posee a su disposicion: \n");
+                            				Console.WriteLine("La cantidad de: "+ deFiesta.cantidadEmpleado() + " Empleados.");
                             				break;
                             			case 5:
-                            				
-                            				salir3 = true;
+                            				Console.WriteLine("Opción 5: \n*** VER EMPLEADOS POR LEGAJO *** \n");
+                            				int eleccion2=0;
+                            				bool opcionVal2= false;
+
+											do
+											{
+											    Console.WriteLine("Ingrese el legajo del empleado que desea consultar:");
+											    string inputElec = Console.ReadLine();
+											
+											    if (int.TryParse(inputElec, out eleccion2))
+											    {
+											        opcionVal2 = true;
+											    }
+											    else
+											    {
+											        Console.WriteLine("Ingrese un legajo válido, debe ser un número, sin espacios ni letras.");
+											    }
+											
+											} while (!opcionVal2);
+											
+											foreach(Empleado em in deFiesta.ListaEmpleados)
+											{
+												if(em.Legajo == eleccion2)
+												{
+													Console.WriteLine("Empleado:"+deFiesta.IndiceEmpleado(eleccion2).Nombre+"\nApellido: "+ deFiesta.IndiceEmpleado(eleccion2).Apellido +"\nDNI: "+ deFiesta.IndiceEmpleado(eleccion2).DNI+"\nCargo: "+deFiesta.IndiceEmpleado(eleccion2).Tarea+"\nSueldo: "+deFiesta.IndiceEmpleado(eleccion2).Sueldo+"\nLegajo: "+deFiesta.IndiceEmpleado(eleccion2).Legajo);
+												}
+											}
                             				break;
-                            			
+                            			case 6:
+                          					salir3 = true;
+                            				break;
                             			default:
-                            				
+                            				Console.WriteLine("Ingrese una opción válida. . .");
                             				break;
                             		}
                             	} catch (FormatException e) {
@@ -732,8 +875,16 @@ namespace Trabajo_Practico_Algoritmos
 
 		public Empleado IndiceEmpleado(int pos)
 		{
-			return (Empleado)this.listaEmpleados[pos];
+		    if (pos >= 0 && pos < listaEmpleados.Count)
+		    {
+		    	return (Empleado)listaEmpleados[pos];
+		    }
+		    else
+		    {
+		        throw new IndexOutOfRangeException("El índice está fuera de los límites de la lista de empleados.");
+		    }
 		}
+
 
 
 
@@ -938,10 +1089,9 @@ namespace Trabajo_Practico_Algoritmos
 	public class Empleado
 	{
 		// variables
-
 		protected string nombre, apellido, descripcionTarea;
 		protected int dni, numeroLegajo;
-
+		
 		protected static int legajo = 0;
 		protected double sueldo;
 		
@@ -955,7 +1105,7 @@ namespace Trabajo_Practico_Algoritmos
 			this.dni = dni;
 			this.sueldo = sueldo;
 
-			numeroLegajo = ++legajo;
+			numeroLegajo = legajo ++;
 		}
 		
 		// propiedades
@@ -990,7 +1140,10 @@ namespace Trabajo_Practico_Algoritmos
 			set{this.sueldo = value;}
 		}
 		
-		
+		public int Legajo
+		{
+			get{return numeroLegajo;}
+		}
 		
 	}
 	
@@ -1017,7 +1170,7 @@ namespace Trabajo_Practico_Algoritmos
 	}
 }
 
-class NoINTdetectedException : Exception
+class NoINTException : Exception
 {
 	
 }
