@@ -197,14 +197,15 @@ namespace Trabajo_Practico_Algoritmos
 				                    		
 				                    	case 2: // eliminar un evento de la lista
 				                    		
-											    Console.WriteLine("Ingrese el número del evento que desea cancelar:");
+											    Console.WriteLine("\nIngrese el número del evento que desea cancelar: \n");
+											    verEventos(deFiesta);
 											    int numeroEventoCancelar = int.Parse(Console.ReadLine()); 								     // <--- el valor lo decide el usuario.
 											
 											    if (numeroEventoCancelar >= 1 && numeroEventoCancelar <= deFiesta.cantidadEvento()) 	     // <--- si el numero que puso el usuario es mayor o igual a la posición inicial y menor e igual a la cantidad total de elementos que hay dentro de la lista:           
 											    {
 											        Evento eventoCancelar = deFiesta.IndiceEvento(numeroEventoCancelar - 1); 				 // <--- el metodo retorna el objeto colocado en la posición determinada por el usuario. en el metodo se ve de esta manera -> return (Evento) this.listaEventos[""numeroEventoCancelar""];           
 											        deFiesta.cancelarEvento(eventoCancelar); 												 // <--- elimina el elemento retornado
-											        Console.WriteLine("El evento '" + eventoCancelar.NombreEvento + "' ha sido cancelado."); // <--- lo muestra por consola
+											        Console.WriteLine("\nEl evento '" + eventoCancelar.NombreEvento + "' ha sido cancelado.\n\n"); // <--- lo muestra por consola
 											    }
 											    else
 											    {
@@ -688,7 +689,7 @@ namespace Trabajo_Practico_Algoritmos
 			
 			lista = Salon.verEventos();
 			contador = 1;
-			Console.WriteLine("Lista de Eventos:");
+			Console.WriteLine("\nLista de Eventos:\n");
 			foreach (Evento evento in lista)
 			{
 			    Console.WriteLine(contador + ". Evento: " + evento.NombreEvento + " - Cliente: " + evento.Dni + " - Fecha: " + evento.Fecha.ToString("dd/MM/yyyy") + "\n");
