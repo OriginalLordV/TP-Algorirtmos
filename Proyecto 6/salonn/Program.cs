@@ -622,25 +622,34 @@ namespace Trabajo_Practico_Algoritmos
                             	// MENU
                             	
                             	try {
-	                            	Console.WriteLine("1.");
-	                            	Console.WriteLine("2.");
-	                            	Console.WriteLine("3.");
-	                            	Console.WriteLine("4.");
-	                            	Console.WriteLine("5.");
+	                            	Console.WriteLine("1. ver eventos");
+	                            	Console.WriteLine("2. ver servicios");
+	                            	Console.WriteLine("3. ver personal");
+	                            	Console.WriteLine("4. salir");
 
 	                            	Console.WriteLine("\nelige una opcion: \n");
                             		int opcion4 = int.Parse(Console.ReadLine());
                             		
                             		switch (opcion4) {
                             			case 1:
+                            				deFiesta.verEventos();
                             				break;
                             			case 2:
+                            				Console.WriteLine("seleccione el evento que desea verle los servicios: ");
+                            				verEventos(deFiesta);
+
+                            				int LlamarPos = int.Parse(Console.ReadLine());
+                            				
+                            				verServicios(deFiesta, LlamarPos);
                             				break;
                             			case 3:
+                            				Console.WriteLine("Opción 1: \n*** VER LISTA DE EMPLEADOS ***");
+                            				foreach(Personal em in deFiesta.ListaEmpleados)
+                            				{
+                            					Console.WriteLine("Empleado: "+ em.Nombre + " " + em.Apellido+". \nDNI: " + em.DNI + "\nDesempeña la tarea: " + em.Tarea+", por la cual cobra un sueldo de $" + em.Sueldo +".\n");
+                            				}
                             				break;
                             			case 4:
-                            				break;
-                            			case 5:
                             				salir4 = true;
                             				break;
                             			
