@@ -260,7 +260,7 @@ namespace Trabajo_Practico_Algoritmos
                             while (!salir2) {
                             	
                             	try {
-	                            	Console.WriteLine("1. Agregar servicio.");
+	                            	Console.WriteLine("\n1. Agregar servicio.");
 	                            	Console.WriteLine("2. Eliminar servicio.");
 	                            	Console.WriteLine("3. Ver servicios.");
 	                            	Console.WriteLine("4. Salir.");
@@ -622,20 +622,21 @@ namespace Trabajo_Practico_Algoritmos
                             	// MENU
                             	
                             	try {
-	                            	Console.WriteLine("1. ver eventos");
-	                            	Console.WriteLine("2. ver servicios");
-	                            	Console.WriteLine("3. ver personal");
-	                            	Console.WriteLine("4. salir");
+	                            	Console.WriteLine("\n1. Ver eventos");
+	                            	Console.WriteLine("2. Ver servicios");
+	                            	Console.WriteLine("3. Ver personal");
+	                            	Console.WriteLine("4. Ver eventos por mes");
+	                            	Console.WriteLine("5. Salir");
 
-	                            	Console.WriteLine("\nelige una opcion: \n");
+	                            	Console.WriteLine("\nElige una opcion: \n");
                             		int opcion4 = int.Parse(Console.ReadLine());
                             		
                             		switch (opcion4) {
                             			case 1:
-                            				deFiesta.verEventos();
+                            				verEventos(deFiesta);
                             				break;
                             			case 2:
-                            				Console.WriteLine("seleccione el evento que desea verle los servicios: ");
+                            				Console.WriteLine("\nseleccione el evento que desea verle los servicios: ");
                             				verEventos(deFiesta);
 
                             				int LlamarPos = int.Parse(Console.ReadLine());
@@ -649,7 +650,27 @@ namespace Trabajo_Practico_Algoritmos
                             					Console.WriteLine("Empleado: "+ em.Nombre + " " + em.Apellido+". \nDNI: " + em.DNI + "\nDesempeña la tarea: " + em.Tarea+", por la cual cobra un sueldo de $" + em.Sueldo +".\n");
                             				}
                             				break;
-                            			case 4:
+										case 4:
+											Console.WriteLine("\nseleccione un numero indicando un mes para ver los eventos designados: \n");
+											LlamarPos = int.Parse(Console.ReadLine());
+											
+											if (LlamarPos >= 1 && LlamarPos <= 12) {
+												foreach (Evento evento in deFiesta.verEventos()) {
+													if (evento.Fecha.Month == LlamarPos) {
+														int contador = 1;
+														Console.WriteLine("\n" + contador + ". Evento: " + evento.NombreEvento + " - Cliente: " + evento.Dni + " - Fecha: " + evento.Fecha.ToString("dd/MM/yyyy"));
+														contador++;
+													} // if
+													
+												} // foreach
+												
+											} // if
+											
+											else {
+												Console.WriteLine("\n\ningrese un mes válido. \n\n");
+											}
+											break;
+                            			case 5:
                             				salir4 = true;
                             				break;
                             			
