@@ -94,7 +94,7 @@ namespace Trabajo_Practico_Algoritmos
 				                    Console.WriteLine("3. Ver Eventos");
 				                    Console.WriteLine("4. Ver un Evento en especifico / mas detalles.");
 				                    
-				                    Console.WriteLine("5. Volver atrás");
+				                    Console.WriteLine("5. Volver atrás\n");
 				                    
 				                    
 				                    int opcion1 = int.Parse(Console.ReadLine());
@@ -149,20 +149,30 @@ namespace Trabajo_Practico_Algoritmos
 														{
 														    Console.Write("Ingrese el mes: ");
 														    string inputMes = Console.ReadLine();
+														    
 														    if (!int.TryParse(inputMes, out mes) || mes < 1 || mes > 12)
 														    {
-														        throw new FormatException("Mes inválido. Por favor, ingrese un número entero válido entre 1 y 12.");
+														        throw new FormatException("Mes inválido. Por favor, ingrese un número entero válido entre 1 y 12."); // si ingresas mal salta a la linea 183 y queda como resultado fecha (01/01/0001)
 														    }
 														
 														    Console.Write("Ingrese el día: ");
 														    string inputDia = Console.ReadLine();
 														    if (!int.TryParse(inputDia, out dia) || dia < 1 || dia > 31)
 														    {
-														        throw new FormatException("Día inválido. Por favor, ingrese un número entero válido entre 1 y 31.");
+														        throw new FormatException("Día inválido. Por favor, ingrese un número entero válido entre 1 y 31."); // si ingresas mal salta a la linea 183 y queda como resultado fecha (01/01/0001)
 														    }
 														    
+														    														    
+														    foreach (Evento evento in deFiesta.verEventos()) {
+														    	if (!int.TryParse(inputMes, out mes) || mes == evento.Fecha.Month || !int.TryParse(inputDia, out dia) || dia == evento.Fecha.Day) { // intenté copiar tu codigo pero pasa lo mismo y no se pq xd : mi intencion es cortar la reservacion del evento
+																	Console.WriteLine("Ya existe un evento para esa fecha, ingrese otra fecha distinta porfavor");
+																	opcionA = 0; // aca esta la prueba de q no funciona, intenté con break tmb
+														    	}
+														    }
+														    
+														    
 														    fecha = new DateTime(agno, mes, dia);
-														    Console.WriteLine("Fecha ingresada correctamente: " + fecha.ToString() + "\n\n");
+														    Console.WriteLine("\nFecha ingresada correctamente: " + fecha.ToString() + "\n\n");
 														}
 														catch (FormatException e)
 														{
