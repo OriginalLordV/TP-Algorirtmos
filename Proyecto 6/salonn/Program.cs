@@ -102,7 +102,9 @@ namespace Trabajo_Practico_Algoritmos
 				                    switch (opcion1) {
 
 				                    	case 1: // reservar el salon para un evento
+				                    		bool salirEvento = false; // intento
 				                    		int opcionA;
+				                    		
 				                    		do
 				                    		{
 				                    			Console.WriteLine("Seleccione Una opción de evento: \n1. Bautismo \n2. Cumpleaños \n3. Fiesta de Quince \n4. Despedida de Soltera/o \n5. Casamiento \n6. Volver atrás");
@@ -130,15 +132,16 @@ namespace Trabajo_Practico_Algoritmos
 				                    				case 5:
 				                    					tipoEv = "Casamiento";
 				                    					break;
-				                    				case 6:
-				                    					opcionA = 0;
+													case 6:
+														salirEvento = true; // era anteriormente opcionA = 0;
 				                    					break;
 				                    				default:
 				                    					Console.WriteLine("Ingrese una opción válida.");
 				                    					break;
 				                    			}
-				                    			if (opcionA == 0)
+				                    			if (opcionA == 6) // anteriormente era opcionA = 0;
 											    {
+													salirEvento = true; // no estaba xd
 											        break;
 											    }
 
@@ -152,56 +155,60 @@ namespace Trabajo_Practico_Algoritmos
 														    
 														    if (!int.TryParse(inputMes, out mes) || mes < 1 || mes > 12)
 														    {
-														        throw new FormatException("Mes inválido. Por favor, ingrese un número entero válido entre 1 y 12."); // si ingresas mal salta a la linea 183 y queda como resultado fecha (01/01/0001)
+														        throw new FormatException("Mes inválido. Por favor, ingrese un número entero válido entre 1 y 12."); // si ingresas mal salta a la linea 187 y queda como resultado fecha (01/01/0001)
 														    }
 														
 														    Console.Write("Ingrese el día: ");
 														    string inputDia = Console.ReadLine();
 														    if (!int.TryParse(inputDia, out dia) || dia < 1 || dia > 31)
 														    {
-														        throw new FormatException("Día inválido. Por favor, ingrese un número entero válido entre 1 y 31."); // si ingresas mal salta a la linea 183 y queda como resultado fecha (01/01/0001)
+														        throw new FormatException("Día inválido. Por favor, ingrese un número entero válido entre 1 y 31."); // si ingresas mal salta a la linea 187 y queda como resultado fecha (01/01/0001)
 														    }
 														    
 														    														    
-														    foreach (Evento evento in deFiesta.verEventos()) {
-														    	if (!int.TryParse(inputMes, out mes) || mes == evento.Fecha.Month || !int.TryParse(inputDia, out dia) || dia == evento.Fecha.Day) { // intenté copiar tu codigo pero pasa lo mismo y no se pq xd : mi intencion es cortar la reservacion del evento
-																	Console.WriteLine("Ya existe un evento para esa fecha, ingrese otra fecha distinta porfavor");
-																	opcionA = 0; // aca esta la prueba de q no funciona, intenté con break tmb
+														    foreach (Evento evento in deFiesta.verEventos()) { // recorre la lista de eventos de la clase salon
+														    	if (!int.TryParse(inputMes, out mes) || mes == evento.Fecha.Month || !int.TryParse(inputDia, out dia) || dia == evento.Fecha.Day) { // si el numero ingresado es igual al mes del objeto datetime e igual al dia del objeto datetime ->
+																	Console.WriteLine("Ya existe un evento para esa fecha"); 
+																	salirEvento = true; // con una variable booleana que defina cuando se termina el while
+																	break; // break para cortar el foreach
 														    	}
 														    }
 														    
-														    
 														    fecha = new DateTime(agno, mes, dia);
-														    Console.WriteLine("\nFecha ingresada correctamente: " + fecha.ToString() + "\n\n");
+														    
 														}
 														catch (FormatException e)
 														{
 														    Console.WriteLine(e.Message);
 														}
 
-				                    					
-				                    			Console.Write("Ingrese su nombre: ");
-				                    			nombreEv = Console.ReadLine();
-				                    			Console.Write("Para finalizar, ingrese su DNI: ");
-				                    			dniCli= Console.ReadLine();
+				                    					if (!salirEvento) { // lo metí dentro de un if para que se corte el programa en caso de ingresar una fecha igual a otra
+															
+														    Console.WriteLine("\nFecha ingresada correctamente: " + fecha.ToString() + "\n\n");
+															
+							                    			Console.Write("Ingrese su nombre: ");
+							                    			nombreEv = Console.ReadLine();
+							                    			Console.Write("Para finalizar, ingrese su DNI: ");
+							                    			dniCli= Console.ReadLine();
+							                    			
+							                    			if(dniCli.Length == 8)
+							                    			{
+							                    				Console.WriteLine("El evento se ha agregado con éxito. \n\n");
+							                    				Evento evento = new Evento(nombreEv, tipoEv, dniCli, fecha);
+							                    				deFiesta.reservarEvento(evento);
+							                    			}
+							                    			
+							                    			else
+							                    			{
+							                    				Console.WriteLine("Ingrese un DNI válido, debe incluir 8 carácteres y ser todos números. \n\n");
+							                    				dniCli= Console.ReadLine(); // si no pones nada, se guarda sin ningun valor dentro y sigue funcionando como si nada
+							                    			}
 				                    			
-				                    			if(dniCli.Length == 8)
-				                    			{
-				                    				
-				                    				Console.WriteLine("El evento se ha agregado con éxito. \n\n");
-				                    				Evento evento = new Evento(nombreEv, tipoEv, dniCli, fecha);
-				                    				deFiesta.reservarEvento(evento);
-				                    			}
-				                    			
-				                    			else
-				                    			{
-				                    				Console.WriteLine("Ingrese un DNI válido, debe incluir 8 carácteres y ser todos números. \n\n");
-				                    				dniCli= Console.ReadLine();
-				                    			}
-				                    			
+				                    					}
+
 				                    			
 				                    		}
-				                    		while (opcionA != 0);
+				                    		while (!salirEvento); // anteriormente opcionA == 0;
 				                    		
 				                    		break;//FIN DEL CASE 1
 				                    		
