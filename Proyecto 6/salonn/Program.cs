@@ -92,9 +92,8 @@ namespace Trabajo_Practico_Algoritmos
                             		Console.WriteLine("1. Agregar mi evento");
 	                    			Console.WriteLine("2. Cancelar evento existente");
 				                    Console.WriteLine("3. Ver Eventos");
-				                    Console.WriteLine("4. Ver un Evento en especifico / mas detalles.");
 				                    
-				                    Console.WriteLine("5. Volver atrás\n");
+				                    Console.WriteLine("4. Volver atrás\n");
 				                    
 				                    
 				                    int opcion1 = int.Parse(Console.ReadLine());
@@ -155,20 +154,20 @@ namespace Trabajo_Practico_Algoritmos
 														    
 														    if (!int.TryParse(inputMes, out mes) || mes < 1 || mes > 12)
 														    {
-														        throw new FormatException("Mes inválido. Por favor, ingrese un número entero válido entre 1 y 12."); // si ingresas mal salta a la linea 187 y queda como resultado fecha (01/01/0001)
+														        throw new FormatException("\nMes inválido. Por favor, ingrese un número entero válido entre 1 y 12.\n\n"); // si ingresas mal salta a la linea 187 y queda como resultado fecha (01/01/0001)
 														    }
 														
 														    Console.Write("Ingrese el día: ");
 														    string inputDia = Console.ReadLine();
 														    if (!int.TryParse(inputDia, out dia) || dia < 1 || dia > 31)
 														    {
-														        throw new FormatException("Día inválido. Por favor, ingrese un número entero válido entre 1 y 31."); // si ingresas mal salta a la linea 187 y queda como resultado fecha (01/01/0001)
+														        throw new FormatException("\nDía inválido. Por favor, ingrese un número entero válido entre 1 y 31.\n\n"); // si ingresas mal salta a la linea 187 y queda como resultado fecha (01/01/0001)
 														    }
 														    
 														    														    
 														    foreach (Evento evento in deFiesta.verEventos()) { // recorre la lista de eventos de la clase salon
 														    	if (!int.TryParse(inputMes, out mes) || mes == evento.Fecha.Month || !int.TryParse(inputDia, out dia) || dia == evento.Fecha.Day) { // si el numero ingresado es igual al mes del objeto datetime e igual al dia del objeto datetime ->
-																	Console.WriteLine("Ya existe un evento para esa fecha"); 
+																	Console.WriteLine("\nYa existe un evento para esa fecha\n\n"); 
 																	salirEvento = true; // con una variable booleana que defina cuando se termina el while
 																	break; // break para cortar el foreach
 														    	}
@@ -182,18 +181,18 @@ namespace Trabajo_Practico_Algoritmos
 														    Console.WriteLine(e.Message);
 														}
 
-				                    					if (!salirEvento) { // lo metí dentro de un if para que se corte el programa en caso de ingresar una fecha igual a otra
+														if (fecha != new DateTime(0001, 1, 1) | !salirEvento) { // lo metí dentro de un if para que se corte el programa en caso de ingresar una fecha igual a otra
 															
 														    Console.WriteLine("\nFecha ingresada correctamente: " + fecha.ToString() + "\n\n");
 															
-							                    			Console.Write("Ingrese su nombre: ");
+							                    			Console.Write("\nIngrese su nombre: \n");
 							                    			nombreEv = Console.ReadLine();
-							                    			Console.Write("Para finalizar, ingrese su DNI: ");
+							                    			Console.Write("\nPara finalizar, ingrese su DNI: \n");
 							                    			dniCli= Console.ReadLine();
 							                    			
 							                    			if(dniCli.Length == 8)
 							                    			{
-							                    				Console.WriteLine("El evento se ha agregado con éxito. \n\n");
+							                    				Console.WriteLine("\nEl evento se ha agregado con éxito. \n\n");
 							                    				Evento evento = new Evento(nombreEv, tipoEv, dniCli, fecha);
 							                    				deFiesta.reservarEvento(evento);
 							                    			}
@@ -236,20 +235,7 @@ namespace Trabajo_Practico_Algoritmos
 												
 				                    		break; //FIN DEL CASE 3
 				                    		
-				                    	case 4:  // mostrar posicion de un evento
-				                    		try {
-										   		Console.WriteLine("\n¿Qué número de evento deseas ver? \n");
-										   		int llamarPos = int.Parse(Console.ReadLine()); // decide el usuario
-										   	
-										   		Evento retornarPos = deFiesta.IndiceEvento(llamarPos); // la definición del metodo es: public EVENTO indiceEvento ---> de qué tipo va a ser la variable que guarda el valor retornado? de tipo evento.
-										   		
-										   		Console.WriteLine("\nEvento de: " + retornarPos.NombreEvento + ". \n\nFecha: " + retornarPos.Fecha.ToString("dd/MM/yyyy") + ". \n\nDNI: " + retornarPos.Dni + ". \n\nEncargado: " + retornarPos.EncargadoEvento.Nombre + ". \n\nTipo de evento: " + retornarPos.TipoEvento + "\n\n");
 
-												
-										   	} catch (System.ArgumentOutOfRangeException) {
-										   		Console.WriteLine("\nno existe tal posicion \n");
-											}
-				                    		break; // FIN DEL CASE 4
 				                    		
 				                    	default: // volver atras. (28/10/2023): eliminé case 5 y 6
 				                    		
@@ -463,7 +449,7 @@ namespace Trabajo_Practico_Algoritmos
                             				Console.WriteLine("Opción 1: \n*** VER LISTA DE EMPLEADOS ***");
                             				foreach(Personal em in deFiesta.ListaEmpleados)
                             				{
-                            					Console.WriteLine("Empleado: "+ em.Nombre + " " + em.Apellido+". \nDNI: " + em.DNI + "\nDesempeña la tarea: " + em.Tarea+", por la cual cobra un sueldo de $" + em.Sueldo +".\n");
+                            					Console.WriteLine("Empleado: "+ em.Nombre + " " + em.Apellido+". \nDNI: " + em.DNI + "\nDesempeña la tarea: " + em.Tarea+", por la cual cobra un sueldo de $" + em.Sueldo + ". \nLegajo: " + em.Legajo +".\n");
                             				}
                             				break; // Ver empleados
                             				
