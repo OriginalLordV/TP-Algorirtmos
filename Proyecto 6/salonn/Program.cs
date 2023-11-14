@@ -274,127 +274,131 @@ namespace Trabajo_Practico_Algoritmos
                             		
                             		switch (opcion2) {
                             			case 1:
-                            				
-                            				int seleccionarServicio;
-                            				
-                            				do {
-                            					Console.WriteLine("Seleccione el tipo de servicio: \n1. Catering, costo 300 \n2. Bebida, costo: 500 \n3. Bachero, costo: 1 \n4. Tropical, costo: 400 \n5. Inflables, costo: 1500 \n6. Barra-brava, costo: 2000 \n7. Salir \n\n");
-                            					seleccionarServicio = int.Parse(Console.ReadLine());
+                            				try {
+	                            				int seleccionarServicio;
+	                            				
+	                            				do {
+													Console.WriteLine("Seleccione el tipo de servicio: \n1. Catering, costo 300 \n2. Bebida, costo: 500 \n3. Bachero, costo: 1 \n4. Tropical, costo: 400 \n5. Inflables, costo: 1500 \n6. Barra-brava, costo: 2000 \n7. Salir \n\n");
+                            						seleccionarServicio = int.Parse(Console.ReadLine());
+
+	                            					string tipoServicio, nombreServicio, DescripcionServicio;
+	                            					int cantidadServicio;
+	                            					double costoInicial;
+	                        						Servicio servicioNuevo;
+	                            					
+	                            					switch (seleccionarServicio) {
+	                            						case 1:
+	                            							nombreServicio = "Catarina Entertainment";
+	                            							tipoServicio = "Catering";
+	                            							costoInicial = 300;
+	                            							DescripcionServicio = "- Servicio de 'Catarina Entertainment' \n- Empleado: " + em1.Nombre + " " + em1.Apellido + "\n- La empresa proporciona: Veneno para ratas, un guaymallen de la escuela n° 12 y un ibuprofeno 600 \n- al extender la cantidad del servicio, sumaremos la cantidad de empleados que necesitemos.";
+	                            							Console.WriteLine("Definí la cantidad del servicio que necesitas: ");
+	                            							
+	                            							try {
+	                            								cantidadServicio = int.Parse(Console.ReadLine());
+	                            								servicioNuevo = new Servicio(nombreServicio, tipoServicio, DescripcionServicio, cantidadServicio, costoInicial);
+																agregarServicio(deFiesta, servicioNuevo);
+	                            							} catch (Exception) {
+																Console.WriteLine("\n\nCantidad inaccesible, por favor intente de nuevo\n\n");
+	                            							}
+	                            							
+	                            							break;
+	                            							
+	                            							
+	                            						case 2:
+	                            							nombreServicio = "Manuel Barras";
+	                            							tipoServicio = "Bebida";
+	                            							costoInicial = 500;
+	                            							cantidadServicio = 1;
+	                            							DescripcionServicio = "- Servicio proporcionado por 'Manuel Barras' \n- Empleado: " + em2.Nombre + " " + em2.Apellido + "\n- Cócteles: Gin Lima, Destornillador, Mula de Moscú, Cherry Blossom, Cosmopolitan, Sex on the beach, Permatrago \n- notas del Empleado: les juro que la bebida no contiene ningún tipo de leche.";
+	                            							
+	                            							// aca se agrega el servicio
+	                            							servicioNuevo = new Servicio(nombreServicio, tipoServicio, DescripcionServicio, cantidadServicio, costoInicial);
+	                            							agregarServicio(deFiesta, servicioNuevo);
+	
+	                            							break;
+	                            							
+	                            							
+	                            						case 3:
+	                            							nombreServicio = "Restaurante Hierbabuena";
+	                            							tipoServicio = "Bachero";
+	                            							costoInicial = 1;
+	                            							DescripcionServicio = "- Servicio Proporcionado por 'Restaurante Hierbabuena' \n- Empleado: " +  em3.Nombre + " " + em3.Apellido + "\n- al extender la cantidad del servicio, sumaremos la cantidad de empleados que necesitemos.";
+	                            							Console.WriteLine("Definí la cantidad del servicio que necesitas: ");
+	                            							try {
+	                            								cantidadServicio = int.Parse(Console.ReadLine());
+	                            								servicioNuevo = new Servicio(nombreServicio, tipoServicio, DescripcionServicio, cantidadServicio, costoInicial);
+																agregarServicio(deFiesta, servicioNuevo);
+	                            							} catch (Exception) {
+																Console.WriteLine("\n\nCantidad inaccesible, por favor intente de nuevo\n\n");
+	                            							}
+															
+	                            							break;
+	                            							
+	                            							
+	                            						case 4:
+	                            							nombreServicio = "Cacho Mimoso";
+	                            							tipoServicio = "Tropical";
+	                            							costoInicial = 400;
+	                            							cantidadServicio = 1;
+	                            							DescripcionServicio = "- Servicio Proporcionado por 'Cacho Mimoso' \n- Empleado: " + em4.Nombre + " " + em4.Apellido + "\n- Canciones que toco: \n\n-- 'Yo me enamoré' \n-- 'Te vas a arrepentir' \n-- 'Y Ahota Te Vas' \n-- 'Choque 2' \n-- 'Doble Vida' \n-- 'El Mas Popular' \n-- 'Dios me libre' \n-- 'Amores como el nuestro' \n-- 'Como pude amarla' \n-- 'Loquito por ti'  \n-- 'Como Me Voy A Olvidar' \n-- 'No Me Arrepiento De Este Amor' \n\n- Notas del Cantante: 'Cuando me quedo sin el instrumento empiezo a tararear loco, no me importa nada.'";
+	                            							
+	                            							// aca se agrega el servicio
+	                            							servicioNuevo = new Servicio(nombreServicio, tipoServicio, DescripcionServicio, cantidadServicio, costoInicial);
+	                            							agregarServicio(deFiesta, servicioNuevo);
+	
+	                            							break;
+	                            							
+	                            							
+	                            						case 5:
+	                            							nombreServicio = "Sarandí de los inflables";
+	                            							tipoServicio = "Inflables";
+	                            							costoInicial = 1500;
+	                            							DescripcionServicio = "- Servicio Proporcionado por 'Sarandí de los inflables' \n- Empleado: " + em5.Nombre + " " + em5.Apellido + "\n- Material utilizado: Lona, Nailon para las redes, equipo de motor, soplador monofásico y una turbina. \n- Nota: mi hija me rompió el castillo de Anor Londo, por lo que queda deshabilitado temporalmente como opción negociable";
+	                            							
+	                            							Console.WriteLine("Definí la cantidad del servicio que necesitas: ");
+	                            							try {
+	                            								cantidadServicio = int.Parse(Console.ReadLine());
+	                            								servicioNuevo = new Servicio(nombreServicio, tipoServicio, DescripcionServicio, cantidadServicio, costoInicial);
+																agregarServicio(deFiesta, servicioNuevo);
+	                            							} catch (Exception) {
+																Console.WriteLine("\n\nCantidad inaccesible, por favor intente de nuevo\n\n");
+	                            							}
+	
+	                            							break;
+	                            							
+	                            							
+	                            						case 6:
+	                            							nombreServicio = "LA BARRA 14";
+	                            							tipoServicio = "Barra Brava";
+	                            							costoInicial = 2000;
+	                            							cantidadServicio = 1;
+	                            							DescripcionServicio = "- Servicio Proporcionado por 'LA BARRA 14' \n- Empleado: " + em6.Nombre + " " + em6.Apellido + "\n- Condiciones: \n\n1. si so' de banfield te vamo' a buscar. \n\n- Te bancamos el presunto divorcio con las siguientes canciones: \n\n-- 'Alentando me quiero morir' \n-- 'Despacito' \n-- 'Grana, Mi Buen Amigo' \n-- 'La 14 Siempre Va' \n-- 'La Barra 14 siempre es una fiesta' \n-- 'La 14 del Tablón' \n-- 'Que Te Pasa Taladro' \n-- 'Señores Dejo Todo, Que Me Voy A Ver Al Grana' \n-- 'Vamos Vamos Vamos Los Granates' ";
+	                            							
+	                            							// aca se agrega el servicio
+	                            							servicioNuevo = new Servicio(nombreServicio, tipoServicio, DescripcionServicio, cantidadServicio, costoInicial);
+	                            							agregarServicio(deFiesta, servicioNuevo);
+	
+	                            							break;
+	                            							
+	                            						case 7:
+	                            							seleccionarServicio = 0;
+	                            							break;
+	                            							
+	                            						default:
+	                            							Console.WriteLine("\nIngrese una opción válida.\n");
+	                            							break;
+	                            							
+	                            						} // switch
+                        			
+                            						} while (seleccionarServicio != 0); // do-while "agregar servicios"
                             					
-                            					string tipoServicio, nombreServicio, DescripcionServicio;
-                            					int cantidadServicio;
-                            					double costoInicial;
-                            					Servicio servicioNuevo;
+                            					} // try
                             					
-                            					switch (seleccionarServicio) {
-                            						case 1:
-                            							nombreServicio = "Catarina Entertainment";
-                            							tipoServicio = "Catering";
-                            							costoInicial = 300;
-                            							DescripcionServicio = "- Servicio de 'Catarina Entertainment' \n- Empleado: " + em1.Nombre + " " + em1.Apellido + "\n- La empresa proporciona: Veneno para ratas, un guaymallen de la escuela n° 12 y un ibuprofeno 600 \n- al extender la cantidad del servicio, sumaremos la cantidad de empleados que necesitemos.";
-                            							Console.WriteLine("Definí la cantidad del servicio que necesitas: ");
-                            							
-                            							try {
-                            								cantidadServicio = int.Parse(Console.ReadLine());
-                            								servicioNuevo = new Servicio(nombreServicio, tipoServicio, DescripcionServicio, cantidadServicio, costoInicial);
-															agregarServicio(deFiesta, servicioNuevo);
-                            							} catch (Exception) {
-															Console.WriteLine("\n\nCantidad inaccesible, por favor intente de nuevo\n\n");
-                            							}
-                            							
-                            							break;
-                            							
-                            							
-                            						case 2:
-                            							nombreServicio = "Manuel Barras";
-                            							tipoServicio = "Bebida";
-                            							costoInicial = 500;
-                            							cantidadServicio = 1;
-                            							DescripcionServicio = "- Servicio proporcionado por 'Manuel Barras' \n- Empleado: " + em2.Nombre + " " + em2.Apellido + "\n- Cócteles: Gin Lima, Destornillador, Mula de Moscú, Cherry Blossom, Cosmopolitan, Sex on the beach, Permatrago \n- notas del Empleado: les juro que la bebida no contiene ningún tipo de leche.";
-                            							
-                            							// aca se agrega el servicio
-                            							servicioNuevo = new Servicio(nombreServicio, tipoServicio, DescripcionServicio, cantidadServicio, costoInicial);
-                            							agregarServicio(deFiesta, servicioNuevo);
-
-                            							break;
-                            							
-                            							
-                            						case 3:
-                            							nombreServicio = "Restaurante Hierbabuena";
-                            							tipoServicio = "Bachero";
-                            							costoInicial = 1;
-                            							DescripcionServicio = "- Servicio Proporcionado por 'Restaurante Hierbabuena' \n- Empleado: " +  em3.Nombre + " " + em3.Apellido + "\n- al extender la cantidad del servicio, sumaremos la cantidad de empleados que necesitemos.";
-                            							Console.WriteLine("Definí la cantidad del servicio que necesitas: ");
-                            							try {
-                            								cantidadServicio = int.Parse(Console.ReadLine());
-                            								servicioNuevo = new Servicio(nombreServicio, tipoServicio, DescripcionServicio, cantidadServicio, costoInicial);
-															agregarServicio(deFiesta, servicioNuevo);
-                            							} catch (Exception) {
-															Console.WriteLine("\n\nCantidad inaccesible, por favor intente de nuevo\n\n");
-                            							}
-														
-                            							break;
-                            							
-                            							
-                            						case 4:
-                            							nombreServicio = "Cacho Mimoso";
-                            							tipoServicio = "Tropical";
-                            							costoInicial = 400;
-                            							cantidadServicio = 1;
-                            							DescripcionServicio = "- Servicio Proporcionado por 'Cacho Mimoso' \n- Empleado: " + em4.Nombre + " " + em4.Apellido + "\n- Canciones que toco: \n\n-- 'Yo me enamoré' \n-- 'Te vas a arrepentir' \n-- 'Y Ahota Te Vas' \n-- 'Choque 2' \n-- 'Doble Vida' \n-- 'El Mas Popular' \n-- 'Dios me libre' \n-- 'Amores como el nuestro' \n-- 'Como pude amarla' \n-- 'Loquito por ti'  \n-- 'Como Me Voy A Olvidar' \n-- 'No Me Arrepiento De Este Amor' \n\n- Notas del Cantante: 'Cuando me quedo sin el instrumento empiezo a tararear loco, no me importa nada.'";
-                            							
-                            							// aca se agrega el servicio
-                            							servicioNuevo = new Servicio(nombreServicio, tipoServicio, DescripcionServicio, cantidadServicio, costoInicial);
-                            							agregarServicio(deFiesta, servicioNuevo);
-
-                            							break;
-                            							
-                            							
-                            						case 5:
-                            							nombreServicio = "Sarandí de los inflables";
-                            							tipoServicio = "Inflables";
-                            							costoInicial = 1500;
-                            							DescripcionServicio = "- Servicio Proporcionado por 'Sarandí de los inflables' \n- Empleado: " + em5.Nombre + " " + em5.Apellido + "\n- Material utilizado: Lona, Nailon para las redes, equipo de motor, soplador monofásico y una turbina. \n- Nota: mi hija me rompió el castillo de Anor Londo, por lo que queda deshabilitado temporalmente como opción negociable";
-                            							
-                            							Console.WriteLine("Definí la cantidad del servicio que necesitas: ");
-                            							try {
-                            								cantidadServicio = int.Parse(Console.ReadLine());
-                            								servicioNuevo = new Servicio(nombreServicio, tipoServicio, DescripcionServicio, cantidadServicio, costoInicial);
-															agregarServicio(deFiesta, servicioNuevo);
-                            							} catch (Exception) {
-															Console.WriteLine("\n\nCantidad inaccesible, por favor intente de nuevo\n\n");
-                            							}
-
-                            							break;
-                            							
-                            							
-                            						case 6:
-                            							nombreServicio = "LA BARRA 14";
-                            							tipoServicio = "Barra Brava";
-                            							costoInicial = 2000;
-                            							cantidadServicio = 1;
-                            							DescripcionServicio = "- Servicio Proporcionado por 'LA BARRA 14' \n- Empleado: " + em6.Nombre + " " + em6.Apellido + "\n- Condiciones: \n\n1. si so' de banfield te vamo' a buscar. \n\n- Te bancamos el presunto divorcio con las siguientes canciones: \n\n-- 'Alentando me quiero morir' \n-- 'Despacito' \n-- 'Grana, Mi Buen Amigo' \n-- 'La 14 Siempre Va' \n-- 'La Barra 14 siempre es una fiesta' \n-- 'La 14 del Tablón' \n-- 'Que Te Pasa Taladro' \n-- 'Señores Dejo Todo, Que Me Voy A Ver Al Grana' \n-- 'Vamos Vamos Vamos Los Granates' ";
-                            							
-                            							// aca se agrega el servicio
-                            							servicioNuevo = new Servicio(nombreServicio, tipoServicio, DescripcionServicio, cantidadServicio, costoInicial);
-                            							agregarServicio(deFiesta, servicioNuevo);
-
-                            							break;
-                            							
-                            							
-                            						case 7:
-                            							seleccionarServicio = 0;
-                            							break;
-                            							
-                            							
-                            						default:
-                            							Console.WriteLine("Ingrese una opción válida.");
-                            							break;
-                            							
-                            					} // switch
-                            					
-                            				} while (seleccionarServicio != 0); // do-while "agregar servicios"
-                            				break;
+                        					catch (Exception) {
+												Console.WriteLine("\n\nIntente tomar una opción válida.\n\n");
+                        					}
+                        					break;
                             				
                             				
                             			case 2: // eliminar servicio
