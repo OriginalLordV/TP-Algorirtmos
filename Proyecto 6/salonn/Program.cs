@@ -293,13 +293,15 @@ namespace Trabajo_Practico_Algoritmos
                             							costoInicial = 300;
                             							DescripcionServicio = "- Servicio de 'Catarina Entertainment' \n- Empleado: " + em1.Nombre + " " + em1.Apellido + "\n- La empresa proporciona: Veneno para ratas, un guaymallen de la escuela n° 12 y un ibuprofeno 600 \n- al extender la cantidad del servicio, sumaremos la cantidad de empleados que necesitemos.";
                             							Console.WriteLine("Definí la cantidad del servicio que necesitas: ");
-                            							cantidadServicio = int.Parse(Console.ReadLine());
                             							
+                            							try {
+                            								cantidadServicio = int.Parse(Console.ReadLine());
+                            								servicioNuevo = new Servicio(nombreServicio, tipoServicio, DescripcionServicio, cantidadServicio, costoInicial);
+															agregarServicio(deFiesta, servicioNuevo);
+                            							} catch (Exception) {
+															Console.WriteLine("\n\nCantidad inaccesible, por favor intente de nuevo\n\n");
+                            							}
                             							
-                            							// aca se agrega el servicio
-														servicioNuevo = new Servicio(nombreServicio, tipoServicio, DescripcionServicio, cantidadServicio, costoInicial);
-														agregarServicio(deFiesta, servicioNuevo);
-														
                             							break;
                             							
                             							
@@ -323,11 +325,13 @@ namespace Trabajo_Practico_Algoritmos
                             							costoInicial = 1;
                             							DescripcionServicio = "- Servicio Proporcionado por 'Restaurante Hierbabuena' \n- Empleado: " +  em3.Nombre + " " + em3.Apellido + "\n- al extender la cantidad del servicio, sumaremos la cantidad de empleados que necesitemos.";
                             							Console.WriteLine("Definí la cantidad del servicio que necesitas: ");
-                            							cantidadServicio = int.Parse(Console.ReadLine());
-                            							
-                            							// aca se agrega el servicio
-                            							servicioNuevo = new Servicio(nombreServicio, tipoServicio, DescripcionServicio, cantidadServicio, costoInicial);
-                            							agregarServicio(deFiesta, servicioNuevo);
+                            							try {
+                            								cantidadServicio = int.Parse(Console.ReadLine());
+                            								servicioNuevo = new Servicio(nombreServicio, tipoServicio, DescripcionServicio, cantidadServicio, costoInicial);
+															agregarServicio(deFiesta, servicioNuevo);
+                            							} catch (Exception) {
+															Console.WriteLine("\n\nCantidad inaccesible, por favor intente de nuevo\n\n");
+                            							}
 														
                             							break;
                             							
@@ -353,11 +357,13 @@ namespace Trabajo_Practico_Algoritmos
                             							DescripcionServicio = "- Servicio Proporcionado por 'Sarandí de los inflables' \n- Empleado: " + em5.Nombre + " " + em5.Apellido + "\n- Material utilizado: Lona, Nailon para las redes, equipo de motor, soplador monofásico y una turbina. \n- Nota: mi hija me rompió el castillo de Anor Londo, por lo que queda deshabilitado temporalmente como opción negociable";
                             							
                             							Console.WriteLine("Definí la cantidad del servicio que necesitas: ");
-                            							cantidadServicio = int.Parse(Console.ReadLine());
-                            							
-                            							// aca se agrega el servicio
-                            							servicioNuevo = new Servicio(nombreServicio, tipoServicio, DescripcionServicio, cantidadServicio, costoInicial);
-                            							agregarServicio(deFiesta, servicioNuevo);
+                            							try {
+                            								cantidadServicio = int.Parse(Console.ReadLine());
+                            								servicioNuevo = new Servicio(nombreServicio, tipoServicio, DescripcionServicio, cantidadServicio, costoInicial);
+															agregarServicio(deFiesta, servicioNuevo);
+                            							} catch (Exception) {
+															Console.WriteLine("\n\nCantidad inaccesible, por favor intente de nuevo\n\n");
+                            							}
 
                             							break;
                             							
@@ -789,9 +795,8 @@ namespace Trabajo_Practico_Algoritmos
 				eventoSeleccionado = s.IndiceEvento(LlamarPos - 1);
 				eventoSeleccionado.agregarServicio(serv);
 				
-				Console.WriteLine("Servicio Agregado a su evento Correctamente.\n\n");
+				Console.WriteLine("\nServicio Agregado a su evento Correctamente.\n\n");
 			} catch (Exception) {
-				
 				Console.WriteLine("\n\nIntente tomar un evento válido\n\n");
 			}
 
