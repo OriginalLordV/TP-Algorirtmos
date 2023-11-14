@@ -407,12 +407,9 @@ namespace Trabajo_Practico_Algoritmos
 												Console.WriteLine("No existe ese evento, intente de nuevo");
                             					throw;
                             				}
-                            				
-                            				
-                            				
+
                             				break;
 
-                            				
                             			case 4: // salir
                             				salir2 = true;
                             				break;
@@ -731,9 +728,10 @@ namespace Trabajo_Practico_Algoritmos
 			lista = Salon.verEventos();
 			contador = 1;
 			Console.WriteLine("\nLista de Eventos:\n");
+			
 			foreach (Evento evento in lista)
 			{
-			    Console.WriteLine(contador + ". Evento: " + evento.NombreEvento + " - Cliente: " + evento.Dni + " - Fecha: " + evento.Fecha.ToString("dd/MM/yyyy") + "- Costo Final: " + evento.CostoTotal +"\n");
+				Console.WriteLine(contador + ". Evento: " + evento.NombreEvento + " - Cliente: " + evento.Dni + " - Fecha: " + evento.Fecha.ToString("dd/MM/yyyy") + "- Costo Final: " + evento.costoTotal() + "\n"); // solo aca se usa este nuevo metodo pero sirve para ver el costo final de cada evento
 			    contador++;
 			}
 		}
@@ -757,11 +755,19 @@ namespace Trabajo_Practico_Algoritmos
 					Console.WriteLine("\n\nEste evento no tiene servicios.\n\n");
 				} else {
 					
+					double costoTotalEvento = 0;
+
+					foreach (Servicio servicio in listaServicios) {
+						costoTotalEvento += servicio.CostoFinal;
+					}
+					
 					Console.WriteLine("\nLista de Servicios: \n");
 					foreach (Servicio servicio in listaServicios) {
-						Console.WriteLine(contadorServicio + ". Descripcion del servicio: \n" + servicio.DescripcionServicio + ".\n\nCosto: " + servicio.CostoFinal + "\n");
+						Console.WriteLine(contadorServicio + ". Descripcion del servicio: \n" + servicio.DescripcionServicio + "\n");
 						contadorServicio++;
 					}
+					
+					Console.WriteLine("\n\nCosto total de servicios: $" + costoTotalEvento);
 				}
 			}
 			 catch (Exception) {
@@ -936,7 +942,6 @@ namespace Trabajo_Practico_Algoritmos
 		private Encargado encargadoEvento;
 		
 		private string dni;
-		private double costoTotal;                              // ????????????????? que es esto
 		
 		private ArrayList listaServicios;
 		
@@ -956,11 +961,6 @@ namespace Trabajo_Practico_Algoritmos
 		
 		// propiedades
 		public int ID{get{return id;}}
-		
-		public double CostoTotal {
-			get {return costoTotal;}
-			set {costoTotal = value;}
-		}
 
 		public Encargado EncargadoEvento {
 			get {return encargadoEvento;}
@@ -998,8 +998,19 @@ namespace Trabajo_Practico_Algoritmos
 
 		
 		
-        // metodos
+		// metodos
+		
+		public double costoTotal() { // nuevo metodo genteeeeeeeeeeeeeeeeeeee
+        
+			double costoTotalEvento = 0;
 
+        	foreach (Servicio servicio in listaServicios)
+        	{
+            	costoTotalEvento += servicio.CostoFinal;
+        	}
+
+        	return costoTotalEvento;
+    	}
 
         public Boolean existenciaServicio(ArrayList n)
         {
@@ -1048,7 +1059,8 @@ namespace Trabajo_Practico_Algoritmos
 			this.tipoServicio = tipoServicio;
 			this.descripcionServicio = descripcionServicio;
 			this.cantidadSolicitada  = cantidadSolicitada;
-			this.costoFinal = costoInicial * cantidadSolicitada;
+			
+			costoFinal = costoInicial * cantidadSolicitada;
 		}
 		
 		// propiedades
