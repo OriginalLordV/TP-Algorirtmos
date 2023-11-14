@@ -145,7 +145,7 @@ namespace Trabajo_Practico_Algoritmos
 											    }
 
 				                    			
-				                    			Console.WriteLine("¿Para que fecha quiere reservar el evento?\n");
+				                    			Console.WriteLine("¿Para qué fecha quiere reservar el evento?\n");
 				                    					
 				                    					try
 														{
@@ -201,6 +201,7 @@ namespace Trabajo_Practico_Algoritmos
 							                    			{
 							                    				Console.WriteLine("Ingrese un DNI válido, debe incluir 8 carácteres y ser todos números. \n\n");
 							                    				dniCli= Console.ReadLine(); // si no pones nada, se guarda sin ningun valor dentro y sigue funcionando como si nada
+							                    				Evento evento = new Evento(nombreEv, tipoEv, dniCli, fecha);
 							                    			}
 				                    			
 				                    					}
@@ -398,10 +399,17 @@ namespace Trabajo_Practico_Algoritmos
                             			case 3: // ver servicios
                             				Console.WriteLine("seleccione el evento que desea verle los servicios: ");
                             				verEventos(deFiesta);
-
-                            				int LlamarPos = int.Parse(Console.ReadLine());
+											
+                            				try {
+                            					int LlamarPos = int.Parse(Console.ReadLine());
+                            					verServicios(deFiesta, LlamarPos);
+                            				} catch (System.IndexOutOfRangeException) {
+												Console.WriteLine("No existe ese evento, intente de nuevo");
+                            					throw;
+                            				}
                             				
-                            				verServicios(deFiesta, LlamarPos);
+                            				
+                            				
                             				break;
 
                             				
@@ -725,7 +733,7 @@ namespace Trabajo_Practico_Algoritmos
 			Console.WriteLine("\nLista de Eventos:\n");
 			foreach (Evento evento in lista)
 			{
-			    Console.WriteLine(contador + ". Evento: " + evento.NombreEvento + " - Cliente: " + evento.Dni + " - Fecha: " + evento.Fecha.ToString("dd/MM/yyyy") + "\n");
+			    Console.WriteLine(contador + ". Evento: " + evento.NombreEvento + " - Cliente: " + evento.Dni + " - Fecha: " + evento.Fecha.ToString("dd/MM/yyyy") + "- Costo Final: " + evento.CostoTotal +"\n");
 			    contador++;
 			}
 		}
@@ -734,21 +742,30 @@ namespace Trabajo_Practico_Algoritmos
 
 		static void verServicios(salon s, int LlamarPos) {
 			
-			int contadorServicio;
-        	Evento eventoSeleccionado;
-    		ArrayList listaServicios;
-			
-			eventoSeleccionado = s.IndiceEvento(LlamarPos - 1);
-			
-			listaServicios = eventoSeleccionado.verServicio();
-			
-			contadorServicio = 1;
-			
-			Console.WriteLine("\nLista de Servicios: \n");
-			
-			foreach (Servicio servicio in listaServicios) {
-				Console.WriteLine(contadorServicio + ". Descripcion del servicio: \n" + servicio.DescripcionServicio + ".\n\nCosto: " + servicio.CostoFinal + "\n");
-				contadorServicio++;
+			try {
+				int contadorServicio;
+	        	Evento eventoSeleccionado;
+	    		ArrayList listaServicios;
+				
+				eventoSeleccionado = s.IndiceEvento(LlamarPos - 1);
+				
+				listaServicios = eventoSeleccionado.verServicio();
+				
+				contadorServicio = 1;
+				
+				if (listaServicios.Count == 0) {
+					Console.WriteLine("\n\nEste evento no tiene servicios.\n\n");
+				} else {
+					
+					Console.WriteLine("\nLista de Servicios: \n");
+					foreach (Servicio servicio in listaServicios) {
+						Console.WriteLine(contadorServicio + ". Descripcion del servicio: \n" + servicio.DescripcionServicio + ".\n\nCosto: " + servicio.CostoFinal + "\n");
+						contadorServicio++;
+					}
+				}
+			}
+			 catch (Exception) {
+				Console.WriteLine("\n\nEl evento seleccionado no existe, intente de nuevo\n\n");
 			}
 		}
 		
@@ -756,41 +773,59 @@ namespace Trabajo_Practico_Algoritmos
 		
 		static void agregarServicio(salon s, Servicio serv) {
 			
-			int LlamarPos;
-			Evento eventoSeleccionado;
-			
-			Console.WriteLine("Defina con un numero al evento que desea añadirle el servicio: \n");
-			verEventos(s);
-			LlamarPos = int.Parse(Console.ReadLine());
-			eventoSeleccionado = s.IndiceEvento(LlamarPos - 1);
-			eventoSeleccionado.agregarServicio(serv);
-			
-			Console.WriteLine("Servicio Agregado a su evento Correctamente. costo final: " + serv.CostoFinal + "\n\n");
+			try {
+				int LlamarPos;
+				Evento eventoSeleccionado;
+				
+				Console.WriteLine("Defina con un numero al evento que desea añadirle el servicio: \n");
+				verEventos(s);
+				LlamarPos = int.Parse(Console.ReadLine());
+				eventoSeleccionado = s.IndiceEvento(LlamarPos - 1);
+				eventoSeleccionado.agregarServicio(serv);
+				
+				Console.WriteLine("Servicio Agregado a su evento Correctamente.\n\n");
+			} catch (Exception) {
+				
+				Console.WriteLine("\n\nIntente tomar un evento válido\n\n");
+			}
+
 		}
 		
 		// funcion eliminar Servicio
 		
 		static void eliminarServicio(salon s) {
-			
-			int LlamarPos;
-			int LlamarPosServicio;
-			Servicio servicioSeleccionado;
-			Evento eventoSeleccionado;
-			
-			Console.WriteLine("\nDefina con un numero al evento que desea eliminarle el servicio: \n\n");
-			verEventos(s);
-			LlamarPos = int.Parse(Console.ReadLine());
-			eventoSeleccionado = s.IndiceEvento(LlamarPos - 1);
-			
-			Console.WriteLine("\nDefina con un numero el servicio que desea eliminar: \n\n");
-			verServicios(s, LlamarPos);
-			LlamarPosServicio = int.Parse(Console.ReadLine());
-			servicioSeleccionado = eventoSeleccionado.indiceServicio(LlamarPosServicio - 1);
-			
-			eventoSeleccionado.eliminarServicio(servicioSeleccionado);
-			
-			
-			Console.WriteLine("Servicio de: " + servicioSeleccionado.TipoServicio + " eliminado correctamente.\n\n");
+			try {
+				int LlamarPos;
+				int LlamarPosServicio;
+				Servicio servicioSeleccionado;
+				Evento eventoSeleccionado;
+				
+				Console.WriteLine("\nDefina con un numero al evento que desea eliminarle el servicio: \n\n");
+				verEventos(s);
+				LlamarPos = int.Parse(Console.ReadLine());
+				eventoSeleccionado = s.IndiceEvento(LlamarPos - 1);
+				
+				try {
+					if (eventoSeleccionado.verServicio().Count == 0) {
+						throw new Exception();
+					}
+					else {
+						Console.WriteLine("\nDefina con un numero el servicio que desea eliminar: \n\n");
+						verServicios(s, LlamarPos);
+						LlamarPosServicio = int.Parse(Console.ReadLine());
+						servicioSeleccionado = eventoSeleccionado.indiceServicio(LlamarPosServicio - 1);
+						
+						eventoSeleccionado.eliminarServicio(servicioSeleccionado);
+						
+						Console.WriteLine("Servicio de: " + servicioSeleccionado.TipoServicio + " eliminado correctamente.\n\n");
+					}
+				} catch (Exception) {
+					Console.WriteLine("\nEste evento no tiene servicios.\n");
+				}
+			} catch (Exception) {
+				Console.WriteLine("\nEl evento definido no existe.\n");
+			}
+
 		}
 	}
 
@@ -852,14 +887,7 @@ namespace Trabajo_Practico_Algoritmos
 
 		public Personal IndiceEmpleado(int pos)
 		{
-		    if (pos >= 0 && pos < listaEmpleados.Count)
-		    {
-		    	return (Personal)listaEmpleados[pos];
-		    }
-		    else
-		    {
-		        throw new IndexOutOfRangeException("El índice está fuera de los límites de la lista de empleados.");
-		    }
+			return (Personal) listaEmpleados[pos];   
 		}
 
 
@@ -882,14 +910,7 @@ namespace Trabajo_Practico_Algoritmos
 
 		public Evento IndiceEvento(int pos)
 		{	
-		    if (pos >= 0 && pos < listaEventos.Count)
-		    {
-		    	return (Evento)listaEventos[pos];
-		    }
-		    else
-		    {
-		        throw new IndexOutOfRangeException("El índice está fuera de los límites de la lista de Eventos.");
-		    }
+			return (Evento) listaEventos[pos];
 		}
 
 		public Boolean ExistenciaEvento(Evento existe)
@@ -915,7 +936,7 @@ namespace Trabajo_Practico_Algoritmos
 		private Encargado encargadoEvento;
 		
 		private string dni;
-		private double costoTotal;
+		private double costoTotal;                              // ????????????????? que es esto
 		
 		private ArrayList listaServicios;
 		
@@ -992,14 +1013,7 @@ namespace Trabajo_Practico_Algoritmos
 
 		public Servicio indiceServicio(int pos)
 		{
-		    if (pos >= 0 && pos < listaServicios.Count)
-		    {
-		    	return (Servicio)listaServicios[pos];
-		    }
-		    else
-		    {
-		        throw new IndexOutOfRangeException("El índice está fuera de los límites de la lista de servicios.");
-		    }
+			return (Servicio) listaServicios[pos];
 		}
 
 		public void agregarServicio(Servicio a)
