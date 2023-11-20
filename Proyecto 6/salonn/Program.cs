@@ -13,7 +13,7 @@ namespace Trabajo_Practico_Algoritmos
 		{
 			
 			
-			salon deFiesta = new salon();
+			hierbaBuena deFiesta = new hierbaBuena();
 			
 			Encargado en = new Encargado("Walter", "Gonzalez",  "Propietario",41000222, 200); // encargado default
 			
@@ -72,7 +72,7 @@ namespace Trabajo_Practico_Algoritmos
  
                 try
                 {
-					Console.WriteLine("\n\nBIENVENIDO AL SALON DE FIESTAS 'SALON DE FIESTAS'\n\npoco originales, ya sabemos. \n\npor eso vamos a quebrar.");
+					Console.WriteLine("\n\nBIENVENIDO AL SALON DE FIESTAS 'HIERBA BUENA'\n\npoco originales, ya sabemos. \n\npor eso vamos a quebrar.");
                 	
                     Console.WriteLine("\n\n1. Administrar eventos");
                     Console.WriteLine("2. Administrar servicios");
@@ -737,7 +737,7 @@ namespace Trabajo_Practico_Algoritmos
 		
 		// funcion ver Eventos
 		
-		static void verEventos(salon Salon) {
+		static void verEventos(hierbaBuena Salon) {
 	        int contador;
 			ArrayList lista;
 			
@@ -754,7 +754,7 @@ namespace Trabajo_Practico_Algoritmos
 		
 		// funcion ver Servicios
 
-		static void verServicios(salon s, int LlamarPos) {
+		static void verServicios(hierbaBuena s, int LlamarPos) {
 			
 			try {
 				int contadorServicio;
@@ -800,7 +800,7 @@ namespace Trabajo_Practico_Algoritmos
 		
 		// funcion eliminar Servicio
 		
-		static void eliminarServicio(salon s) {
+		static void eliminarServicio(hierbaBuena s) {
 			try {
 				int LlamarPos;
 				int LlamarPosServicio;
@@ -838,7 +838,7 @@ namespace Trabajo_Practico_Algoritmos
 
 
 
-    public class salon
+    public class hierbaBuena
     {
 		// variables
 
@@ -847,7 +847,7 @@ namespace Trabajo_Practico_Algoritmos
 
         // constructor
 
-		public salon()
+		public hierbaBuena()
 		{
 			listaEventos = new ArrayList();
 			listaEmpleados = new ArrayList();
