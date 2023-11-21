@@ -339,13 +339,14 @@ namespace Trabajo_Practico_Algoritmos
 					                            					evento.CostoTotal += s.CostoFinal;
 					                            				}
 					                            				
+					                            				
 					                            				bool seleccionValida = false;
 																do
 																{
 																    Console.WriteLine("Ingrese el encargado que trabajará en este evento:");
 																    Console.WriteLine("1- Flavio \n2- Walter");
-																
-																    int seleccion = 0;
+																	
+																	int seleccion = 0;
 																    if (int.TryParse(Console.ReadLine(), out seleccion))
 																    {
 																        switch (seleccion)
@@ -371,7 +372,7 @@ namespace Trabajo_Practico_Algoritmos
 																    }
 																} while (!seleccionValida);
 
-					                            				seleccion = int.Parse(Console.ReadLine());
+					                            				
 					                            				deFiesta.reservarEvento(evento);
 				                            					} // try
 				                            					
@@ -391,6 +392,7 @@ namespace Trabajo_Practico_Algoritmos
 				                    				
 				                    			} while(!salirEventoDNI);
 				                    			
+												Console.WriteLine("\n\nEvento agregado con agregado con éxito.\n\n");
 												salirEvento = true;
 	                    					} while (!salirEvento);
 				                    		
@@ -816,7 +818,7 @@ namespace Trabajo_Practico_Algoritmos
 			
 			foreach (Evento evento in lista)
 			{
-				Console.WriteLine(contador + ". Evento: " + evento.NombreEvento + " - Cliente: " + evento.Dni + " - Fecha: " + evento.Fecha.ToString("dd/MM/yyyy") + "- Costo Final: $" +  evento.CostoTotal + "- Encargado: " + evento.EncargadoEvento.Nombre+"\n"); // solo aca se usa este nuevo metodo pero sirve para ver el costo final de cada evento
+				Console.WriteLine(contador + ". Evento: " + evento.NombreEvento + "\n\n -- Cliente: " + evento.Dni + "\n -- Fecha: " + evento.Fecha.ToString("dd/MM/yyyy") +"\n -- Encargado: " + evento.EncargadoEvento.Nombre+"\n" + "\n -- Costo Final: $" +  evento.CostoTotal+"\n\n"); // solo aca se usa este nuevo metodo pero sirve para ver el costo final de cada evento
 			    contador++;
 			}
 		}
@@ -892,6 +894,7 @@ namespace Trabajo_Practico_Algoritmos
 						servicioSeleccionado = eventoSeleccionado.indiceServicio(LlamarPosServicio - 1);
 						
 						eventoSeleccionado.eliminarServicio(servicioSeleccionado);
+						eventoSeleccionado.CostoTotal = (eventoSeleccionado.CostoTotal - servicioSeleccionado.CostoInicial) + (servicioSeleccionado.CostoInicial * 0.15);
 						
 						Console.WriteLine("Servicio de: " + servicioSeleccionado.TipoServicio + " eliminado correctamente.\n\n");
 					}
